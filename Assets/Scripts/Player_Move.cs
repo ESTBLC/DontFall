@@ -3,12 +3,20 @@ using UnityEngine.Networking;
 
 public class Player_Move : NetworkBehaviour
 {
+    public float forwbacwAdjust = 0.0f;
+    public float leftrightAdjust = 0.0f;
+    public float mouseXAdjust = 0.0f;
+    public float mouseYAdjust = 0.0f;
+
+    private GameObject camera = null;
     private void Start()
     {
+        camera = this.transform.Find("camera").gameObject;
         if (!isLocalPlayer)
         {
-            this.GetComponent<Camera>().enabled = false;
+            camera.SetActive(false);
         }
+
     }
     void Update()
     {
@@ -16,10 +24,14 @@ public class Player_Move : NetworkBehaviour
         {
             return;
         }
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+        var Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
+        var Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
 
-        transform.Rotate(0, x, 0);
-        transform.Translate(0, 0, z);
+        var CamX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
+        var CamY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
+
+        transform.Translate(Tx, 0, Tz);
+        transform.Rotate(CamX, 0, 0);
+        camera.transform.Rotate(0, CamY, 0);
     }
 }
