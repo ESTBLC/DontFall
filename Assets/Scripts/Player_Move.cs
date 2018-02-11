@@ -11,7 +11,7 @@ public class Player_Move : NetworkBehaviour
     private GameObject camera = null;
     private void Start()
     {
-        camera = this.transform.Find("camera").gameObject;
+        camera = this.transform.Find("Camera").gameObject;
         if (!isLocalPlayer)
         {
             camera.SetActive(false);
@@ -31,7 +31,10 @@ public class Player_Move : NetworkBehaviour
         var CamY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
 
         transform.Translate(Tx, 0, Tz);
-        transform.Rotate(CamX, 0, 0);
-        camera.transform.Rotate(0, CamY, 0);
+		transform.Rotate(0, CamX, 0);
+		camera.transform.Rotate(CamY, 0, 0);
+
+
     }
+
 }
