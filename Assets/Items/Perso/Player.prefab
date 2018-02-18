@@ -326,10 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5cc7bc0ba6854345bef32bf1fdf4565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwbacwAdjust: 1
-  leftrightAdjust: 1
-  mouseXAdjust: 0
-  mouseYAdjust: 0
+  forwbacwAdjust: 6
+  leftrightAdjust: 3
+  mouseXAdjust: 200
+  mouseYAdjust: 200
 --- !u!124 &124494504307585070
 Behaviour:
   m_ObjectHideFlags: 1
