@@ -48,7 +48,8 @@ public class Player_Move : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        nbJump = 2;
+        if (collision.gameObject.tag == "Ground")
+            nbJump = 2;
     }
 }
 
