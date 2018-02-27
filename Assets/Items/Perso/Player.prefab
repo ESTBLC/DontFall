@@ -328,8 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwbacwAdjust: 6
   leftrightAdjust: 3
-  mouseXAdjust: 200
-  mouseYAdjust: 200
+  mouseXAdjust: 150
+  mouseYAdjust: 150
   jumpForce: 5
   nbJump: 2
 --- !u!124 &124494504307585070
