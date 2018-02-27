@@ -7,10 +7,14 @@ public class Player_Move : NetworkBehaviour
     public float leftrightAdjust = 0.0f;
     public float mouseXAdjust = 0.0f;
     public float mouseYAdjust = 0.0f;
+    public float jumpForce = 0.0f;
+    public int nbJump = 0;
 
+    private Rigidbody rigid = null;
     private GameObject camera = null;
     private void Start()
     {
+        rigid = GetComponent<Rigidbody>();
         camera = this.transform.Find("Camera").gameObject;
         if (!isLocalPlayer)
         {
@@ -34,7 +38,18 @@ public class Player_Move : NetworkBehaviour
 		transform.Rotate(0, CamX, 0);
 		camera.transform.Rotate(CamY, 0, 0);
 
+        if (Input.GetButtonDown("Jump") && nbJump > 0)
+        {
+            nbJump--;
+            rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        }
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        nbJump = 2;
+    }
 }
+
+
