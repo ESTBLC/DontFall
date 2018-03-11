@@ -12,6 +12,7 @@ public class Player_Move : NetworkBehaviour
 
     private Rigidbody rigid = null;
     private GameObject camera = null;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -20,7 +21,7 @@ public class Player_Move : NetworkBehaviour
         {
             camera.SetActive(false);
         }
-
+        rigid.angularDrag = float.MaxValue; //ugly fix rotation
     }
     void Update()
     {
@@ -37,6 +38,8 @@ public class Player_Move : NetworkBehaviour
         transform.Translate(Tx, 0, Tz);
 		transform.Rotate(0, CamX, 0);
 		camera.transform.Rotate(CamY, 0, 0);
+        Quaternion rotation = transform.rotation;
+        transform.rotation = new Quaternion(0, rotation.y, 0, rotation.w);
 
         if (Input.GetButtonDown("Jump") && nbJump > 0)
         {
@@ -50,6 +53,11 @@ public class Player_Move : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             nbJump = 2;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        
     }
 }
 
