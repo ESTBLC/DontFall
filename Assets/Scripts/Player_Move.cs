@@ -17,7 +17,6 @@ public class Player_Move : NetworkBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         camera = this.transform.Find("Camera").gameObject;
-        
         rigid.angularDrag = float.MaxValue; //ugly fix rotation
     }
     void Update()
@@ -39,17 +38,15 @@ public class Player_Move : NetworkBehaviour
             nbJump--;
             rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
+
+        if (Input.GetButton("Fire1"))
+            GetComponent<Player>().Fire();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
             nbJump = 2;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        
     }
 }
 
