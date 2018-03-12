@@ -17,18 +17,11 @@ public class Player_Move : NetworkBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         camera = this.transform.Find("Camera").gameObject;
-        if (!isLocalPlayer)
-        {
-            camera.SetActive(false);
-        }
+        
         rigid.angularDrag = float.MaxValue; //ugly fix rotation
     }
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         var Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
         var Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
 
@@ -46,7 +39,6 @@ public class Player_Move : NetworkBehaviour
             nbJump--;
             rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)

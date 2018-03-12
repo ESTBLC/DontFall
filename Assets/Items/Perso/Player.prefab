@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 23279619545772810}
   - component: {fileID: 114172233012320420}
   - component: {fileID: 114872077676481124}
+  - component: {fileID: 114686744277569738}
   - component: {fileID: 114792411958640458}
   - component: {fileID: 114752353285129124}
   m_Layer: 0
@@ -68,7 +69,7 @@ GameObject:
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4101339091657102
 Transform:
@@ -277,6 +278,22 @@ MonoBehaviour:
   life: 20
   shield: 0
   dammage: 10
+--- !u!114 &114686744277569738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624360443806116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2ff01af3019ad46a7397b72c63e2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toDisable:
+  - {fileID: 20902074968764680}
+  - {fileID: 124494504307585070}
+  - {fileID: 81613722881163570}
+  - {fileID: 114872077676481124}
 --- !u!114 &114752353285129124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +313,7 @@ MonoBehaviour:
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 0
+  m_InterpolateRotation: 10
   m_InterpolateMovement: 1
 --- !u!114 &114792411958640458
 MonoBehaviour:
