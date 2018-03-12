@@ -25,7 +25,7 @@ public class Player : NetworkBehaviour
         transform.name = "Player " + GetComponent<NetworkIdentity>().netId;
         if (!isLocalPlayer)
             GetComponent<DesactivateComponents>().Desactivate();
-        inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
+        //inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
         currentWeapon = inventory[0];
     }
 	

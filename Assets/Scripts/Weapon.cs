@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : NetworkBehaviour {
 
     // Use this for initialization
     [SerializeField]
@@ -15,10 +15,9 @@ public class Weapon : MonoBehaviour {
         this.father = father;
     }
 
-    public virtual void OnCollisionEnter(Collision collision)
+    public virtual void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.tag == "Player")
-            father.CmdTakeDammage(collision.collider.GetComponent<NetworkIdentity>().netId.ToString(), damage);
+        father.CmdTakeDammage(collision.GetComponent<NetworkIdentity>().netId.ToString(), damage);
     }
 
 }

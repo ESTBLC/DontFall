@@ -9,5 +9,14 @@ public class Bat : Weapon {
     public override void Fire(Player father)
     {
         GetComponent<Animation>().Play();
+        base.Fire(father);
+    }
+
+    public override void OnTriggerEnter(Collider collision)
+    {
+        if (GetComponent<Animation>().isPlaying && collision.tag == "Player")
+        {
+            base.OnTriggerEnter(collision);
+        }        
     }
 }
