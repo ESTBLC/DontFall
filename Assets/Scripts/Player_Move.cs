@@ -3,21 +3,22 @@ using UnityEngine.Networking;
 
 public class Player_Move : NetworkBehaviour
 {
-    public float forwbacwAdjust = 0.0f;
-    public float leftrightAdjust = 0.0f;
-    public float mouseXAdjust = 0.0f;
-    public float mouseYAdjust = 0.0f;
-    public float jumpForce = 0.0f;
-    public int nbJump = 0;
+    public float forwbacwAdjust;
+    public float leftrightAdjust;
+    public float mouseXAdjust;
+    public float mouseYAdjust;
+    public float jumpForce;
+    public int nbJump;
 
-    private Rigidbody rigid = null;
-    private GameObject camera = null;
+    private Rigidbody rigid;
+    private GameObject camera;
+    private Player player = null;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
         camera = this.transform.Find("Camera").gameObject;
-        
         rigid.angularDrag = float.MaxValue; //ugly fix rotation
     }
     void Update()
@@ -39,6 +40,11 @@ public class Player_Move : NetworkBehaviour
             nbJump--;
             rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
+
+        if (Input.GetButton("Fire1"))
+        {
+            player.Fire();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,11 +56,6 @@ public class Player_Move : NetworkBehaviour
             Debug.Log("you are dead");
             Destroy(gameObject);
         }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        
     }
 }
 
