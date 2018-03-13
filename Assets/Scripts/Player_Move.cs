@@ -45,6 +45,11 @@ public class Player_Move : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             nbJump = 2;
+        if (collision.gameObject.tag == "Respawn")
+        {
+            Debug.Log("you are dead");
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionStay(Collision collision)
