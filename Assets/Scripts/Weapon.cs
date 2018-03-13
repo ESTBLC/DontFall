@@ -15,7 +15,7 @@ public class Weapon : NetworkBehaviour {
         this.father = father;
     }
 
-    public virtual void OnTriggerEnter(Collider collision)
+    public virtual void OnTriggerStay(Collider collision)
     {
         father.CmdTakeDammage(collision.GetComponent<NetworkIdentity>().netId.ToString(), damage);
     }
