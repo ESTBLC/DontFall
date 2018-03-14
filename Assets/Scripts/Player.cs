@@ -9,9 +9,10 @@ public class Player : NetworkBehaviour
     public int life = 0;
     [SyncVar]
     public int shield = 0;
-    [SerializeField]
-    private int dammage = 0;
     private string netId;
+    [SerializeField]
+    private List<GameObject> inventory = new List<GameObject>();
+    private GameObject currentWeapon;
 
     public override void OnStartClient()
     {
@@ -24,15 +25,14 @@ public class Player : NetworkBehaviour
         transform.name = "Player " + GetComponent<NetworkIdentity>().netId;
         if (!isLocalPlayer)
             GetComponent<DesactivateComponents>().Desactivate();
+        //inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
+        currentWeapon = inventory[0];
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isLocalPlayer)
-            return;
-        if (Input.GetButton("Fire1"))
-            Fire(dammage);
+
 	}
 
     public void OnDestroy()
@@ -40,28 +40,27 @@ public class Player : NetworkBehaviour
         GameManager.UnRegisterPlayer(GetComponent<NetworkIdentity>().netId.ToString());
     }
 
-    public void TakeDammage(int dammage)
+    public void TakeDammage(int damage)
     {
-        life -= dammage;
+        life -= damage;
     }
 
     [Client]
-    void Fire(int dammage)
+    public void Fire()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out hit);
-        if (hit.collider != null && hit.collider.tag == "Player")
-        {
-            CmdTakeDammage(hit.collider.GetComponent<NetworkIdentity>().netId.ToString(), dammage);
-        }
+        //RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Physics.Raycast(ray, out hit);
+        //if (hit.collider != null && hit.collider.tag == "Player")
+        //{
+        currentWeapon.GetComponent<Weapon>().Fire(this);
+        //}
     }
 
     [Command]
-    public void CmdTakeDammage(string netId, int dammage)
+    public void CmdTakeDammage(string netId, int damage)
     {
         Debug.Log("Player " + netId + " has been hit");
-        GameManager.GetPlayer(netId).TakeDammage(dammage);
-        return;
+        GameManager.GetPlayer(netId).TakeDammage(damage);
     }
 }
