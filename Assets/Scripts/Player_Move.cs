@@ -3,41 +3,52 @@ using UnityEngine.Networking;
 
 public class Player_Move : NetworkBehaviour
 {
-    public float forwbacwAdjust = 0.0f;
-    public float leftrightAdjust = 0.0f;
-    public float mouseXAdjust = 0.0f;
-    public float mouseYAdjust = 0.0f;
-    public float jumpForce = 0.0f;
-    public int nbJump = 0;
+    public float forwbacwAdjust;
+    public float leftrightAdjust;
+    public float mouseXAdjust;
+    public float mouseYAdjust;
+    public float jumpForce;
+    public int nbJump;
 
-    private Rigidbody rigid = null;
-    private GameObject camera = null;
+    private Rigidbody rigid;
+    private GameObject camera;
+    private Player player = null;
+    private float Tx;
+    private float Tz;
+    private float CamX;
+    private float CamY;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
         camera = this.transform.Find("Camera").gameObject;
-        
         rigid.angularDrag = float.MaxValue; //ugly fix rotation
     }
     void Update()
     {
-        var Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
-        var Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
+        Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
+        Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
 
-        var CamX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
-        var CamY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
+        CamX += Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
+        CamX = CamX % 360;
+        CamY += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
+        CamY = Mathf.Clamp(CamY, -90, 70);
 
         transform.Translate(Tx, 0, Tz);
 		transform.Rotate(0, CamX, 0);
-		camera.transform.Rotate(CamY, 0, 0);
-        Quaternion rotation = transform.rotation;
-        transform.rotation = new Quaternion(0, rotation.y, 0, rotation.w);
+        transform.localEulerAngles = new Vector3(0, CamX, 0);
+        camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);
 
         if (Input.GetButtonDown("Jump") && nbJump > 0)
         {
             nbJump--;
             rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            player.Fire();
         }
     }
 
@@ -45,11 +56,11 @@ public class Player_Move : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             nbJump = 2;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        
+        if (collision.gameObject.tag == "Respawn")
+        {
+            Debug.Log("you are dead");
+            Destroy(gameObject);
+        }
     }
 }
 
