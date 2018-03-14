@@ -13,6 +13,10 @@ public class Player_Move : NetworkBehaviour
     private Rigidbody rigid;
     private GameObject camera;
     private Player player = null;
+    private float Tx;
+    private float Tz;
+    private float CamX;
+    private float CamY;
 
     private void Start()
     {
@@ -23,17 +27,18 @@ public class Player_Move : NetworkBehaviour
     }
     void Update()
     {
-        var Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
-        var Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
+        Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;
+        Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;
 
-        var CamX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
-        var CamY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
+        CamX += Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
+        CamX = CamX % 360;
+        CamY += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
+        CamY = Mathf.Clamp(CamY, -90, 70);
 
         transform.Translate(Tx, 0, Tz);
 		transform.Rotate(0, CamX, 0);
-		camera.transform.Rotate(CamY, 0, 0);
-        Quaternion rotation = transform.rotation;
-        transform.rotation = new Quaternion(0, rotation.y, 0, rotation.w);
+        transform.localEulerAngles = new Vector3(0, CamX, 0);
+        camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);
 
         if (Input.GetButtonDown("Jump") && nbJump > 0)
         {
