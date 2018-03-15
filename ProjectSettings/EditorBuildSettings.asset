@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SandboxTEST.unity
     guid: d4ed7f900cf881b42911f24a07c2d0d7
+  - enabled: 1
+    path: Assets/SandboxTEST-Solo.unity
+    guid: ef2d1364c1b6fc84eaa8638f591f9459

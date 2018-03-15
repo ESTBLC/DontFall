@@ -19,7 +19,7 @@ public class AI : MonoBehaviour {
 	void Update () {
         //Update Target
         if (target == null)
-            target = GameObject.FindWithTag("Player");
+            target = GameObject.Find("Player 2");
         agent.SetDestination(target.transform.position);
     }
 

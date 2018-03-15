@@ -375,7 +375,7 @@ RectTransform:
   m_GameObject: {fileID: 559298752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7359858, y: 0.68371814, z: 1}
+  m_LocalScale: {x: 1.7359858, y: 1.0100383, z: 1}
   m_Children: []
   m_Father: {fileID: 1900725050}
   m_RootOrder: 0
@@ -635,7 +635,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 958235306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1900725052}
+        m_MethodName: LoadScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &958235306
@@ -1087,7 +1098,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 64e43801441a6c54bbe285e233a6ac7d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bd1ab869aaac79f48997568e644d5fda, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
