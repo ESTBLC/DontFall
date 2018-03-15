@@ -28,8 +28,10 @@ public class Bat : Weapon {
         Instantiate(flare, hit.point, Quaternion.LookRotation(transform.forward, transform.up));*/
         Debug.Log("coucou");
         ContactPoint contact = collision.contacts[0];
+        ContactPoint contact1 = collision.contacts[1];
         Instantiate(flare, contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
-        
+        Instantiate(flare, contact1.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+
 
     }
     

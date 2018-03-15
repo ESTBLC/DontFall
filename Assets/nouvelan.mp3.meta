@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 16aab201783bf22439967844136eaed2
 timeCreated: 1521044334
+=======
+guid: 7be2fee3719be2243ac53ad296ecb232
+timeCreated: 1521051947
+>>>>>>> Adrien
 licenseType: Free
 AudioImporter:
   externalObjects: {}

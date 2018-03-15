@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 93aac7048d622c7468b68fb975e537f7
 folderAsset: yes
 timeCreated: 1521046153
+=======
+guid: 8b7f40eadc1c5144590a18946fa4f1ea
+folderAsset: yes
+timeCreated: 1521071123
+>>>>>>> Adrien
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
