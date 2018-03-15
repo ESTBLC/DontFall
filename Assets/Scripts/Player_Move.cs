@@ -33,7 +33,7 @@ public class Player_Move : NetworkBehaviour
         CamX += Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;
         CamX = CamX % 360;
         CamY += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;
-        CamY = Mathf.Clamp(CamY, -90, 70);
+        CamY = Mathf.Clamp(CamY, -90, 50);
 
         transform.Translate(Tx, 0, Tz);
 		transform.Rotate(0, CamX, 0);
