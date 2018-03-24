@@ -46,6 +46,10 @@ GameObject:
   - component: {fileID: 114264909347676374}
   - component: {fileID: 114199627018605212}
   - component: {fileID: 82868245335096928}
+  - component: {fileID: 114869249260201562}
+  - component: {fileID: 114339375074850468}
+  - component: {fileID: 114454113465051718}
+  - component: {fileID: 120091296674799168}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -611,6 +615,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   flare: {fileID: 1572020654505106}
+--- !u!114 &114339375074850468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177788427849756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2266a989d3a949843bdeab277670f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  Shoot_particule: {fileID: 0}
+  cam: {fileID: 0}
+--- !u!114 &114454113465051718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177788427849756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ef632db356cae489720b81d00f240e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: 116
+  RecordTime: 5
+  SpeedRewind: 2
 --- !u!114 &114753985291592576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,6 +677,26 @@ MonoBehaviour:
   mouseYAdjust: 150
   jumpForce: 5
   nbJump: 2
+--- !u!114 &114869249260201562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177788427849756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3357df70dbbdd4e84277489a7d6436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: 103
+  cam: {fileID: 20063157476009502}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
+  maxDistance: 50
+  speed: 3
+  hand: {fileID: 4127822407494372}
+  LR: {fileID: 120091296674799168}
 --- !u!114 &114946517609058226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +712,94 @@ MonoBehaviour:
   shield: 0
   inventory:
   - {fileID: 1931787948600398}
+--- !u!120 &120091296674799168
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177788427849756}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8df8ae5e44f64b74281a3f0ac5ed67d4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  m_Parameters:
+    serializedVersion: 2
+    widthMultiplier: 0.5
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 5
+    numCapVertices: 5
+    alignment: 0
+    textureMode: 0
+    generateLightingData: 1
+  m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!124 &124442681178025018
 Behaviour:
   m_ObjectHideFlags: 1
