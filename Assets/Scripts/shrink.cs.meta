@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: fc64bbaefd5f1fb4bbff72d3b3787b8b
+<<<<<<< HEAD
 timeCreated: 1521923038
+=======
+timeCreated: 1521921584
+>>>>>>> Pierre
 licenseType: Free
 MonoImporter:
   externalObjects: {}

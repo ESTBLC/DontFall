@@ -13,7 +13,11 @@ public class TimeBody : MonoBehaviour {
     private float RecordTime = 5f;
 
     [SerializeField]
+<<<<<<< HEAD
     private int SpeedRewind = 2;
+=======
+    private int SpeedRewind = 1;
+>>>>>>> Pierre
 
     List<PointInTime> pointsInTime;
 
