@@ -50,8 +50,8 @@ public class Player_Move : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
         charController.Move(moveDirection);                             //
 		transform.Rotate(0, CamX, 0);                                   //Make the rotation
-        transform.localEulerAngles = new Vector3(0, CamX, 0);          
-        camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);
+        transform.localEulerAngles = new Vector3(0, CamX, 0);                                                                               //
+        camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);    //Black magic
 
         if (Input.GetButton("Fire1")) //Launch fire action
         {

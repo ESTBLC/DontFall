@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public int shield = 0;
     
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();
-    [SerializeField] private List<Behaviour> activationList = new List<Behaviour>();
+    [SerializeField] private List<Object> deactivationList = new List<Object>();
     private PhotonView photonView;
     private GameObject currentWeapon;
 
@@ -17,12 +17,12 @@ public class Player : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         this.name = "Player " + photonView.viewID;
-        if (photonView.isMine)
+        if (!photonView.isMine)
         {
-            int length = activationList.Count;
+            int length = deactivationList.Count;
             for (int i = 0; i < length; i++)
             {
-                activationList[i].enabled = true;
+                Destroy(deactivationList[i]);
             }
         }
         //inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     [PunRPC]
     public void TakeDammage(int damage)
     {
+        Debug.Log(this.gameObject.name + " est touché");
         life -= damage;
         if (life <= 0)
             Destroy();
