@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   debugNetwork: {fileID: 1279470653}
   spawnPoints: []
   spawnTag: SpawnPoint
-  spawnPlayer: {fileID: 1615781246683210, guid: 7f5bc5ec65b782d4e9ed82d2545ace56,
+  spawnPlayer: {fileID: 1081251622419110, guid: 7f5bc5ec65b782d4e9ed82d2545ace56,
     type: 2}
 --- !u!4 &625716434
 Transform:

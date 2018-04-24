@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         photonView = GetComponent<PhotonView>();
-        transform.name = "Player " + photonView.viewID;
+        this.name = "Player " + photonView.viewID;
         if (photonView.isMine)
         {
             int length = activationList.Count;
@@ -35,32 +35,21 @@ public class Player : MonoBehaviour
 
 	}
 
-    public void OnDestroy()
+    public void Destroy()
     {
-        //GameManager.UnRegisterPlayer(GetComponent<NetworkIdentity>().netId.ToString());
+        PhotonNetwork.Destroy(gameObject);
     }
 
+    public void Fire()
+    {
+        currentWeapon.GetComponent<Weapon>().Fire();
+    }
+
+    [PunRPC]
     public void TakeDammage(int damage)
     {
         life -= damage;
-    }
-
-    //[Client]
-    public void Fire()
-    {
-        //RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //Physics.Raycast(ray, out hit);
-        //if (hit.collider != null && hit.collider.tag == "Player")
-        //{
-        currentWeapon.GetComponent<Weapon>().Fire(this);
-        //}
-    }
-
-    //[Command]
-    public void CmdTakeDammage(string netId, int damage)
-    {
-        Debug.Log("Player " + netId + " has been hit");
-        //GameManager.GetPlayer(netId).TakeDammage(damage);
+        if (life <= 0)
+            Destroy();
     }
 }

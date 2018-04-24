@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Weapon : NetworkBehaviour {
+public class Weapon : MonoBehaviour {
 
     // Use this for initialization
-    [SerializeField]
-    public int damage;
-    private Player father;
+    [SerializeField] private int damage;
     
-    public virtual void Fire(Player father)
+    public virtual void Fire()
     {
-        this.father = father;
+
     }
 
     public virtual void OnTriggerStay(Collider collision)
     {
-        father.CmdTakeDammage(collision.GetComponent<NetworkIdentity>().netId.ToString(), damage);
+        collision.gameObject.GetComponent<Player>().TakeDammage(damage);
     }
 
 }

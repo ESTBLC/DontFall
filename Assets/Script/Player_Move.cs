@@ -53,7 +53,7 @@ public class Player_Move : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, CamX, 0);          
         camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1")) //Launch fire action
         {
             player.Fire();
         }
