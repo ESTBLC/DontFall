@@ -12,7 +12,7 @@ public class Player_Move : MonoBehaviour
 
     private CharacterController charController; //CharacterController component reference
     private GameObject camera;                  //Child GameObject Camera reference
-    private Player player = null;
+    private Player player;
     private float Tx;                           //Actual movement variables
     private float Tz;                           //
     private float CamX;                         //
@@ -39,7 +39,7 @@ public class Player_Move : MonoBehaviour
         if (Input.GetButtonDown("Jump") && nbJump > 0)  //Jump and -1 to jump counter
         {
             nbJump--;
-            moveDirection.y = jumpForce;
+            moveDirection.y += jumpForce;
         }
 
         CamX += Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;   //Get actual mouse movement

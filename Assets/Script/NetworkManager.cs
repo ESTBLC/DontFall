@@ -43,7 +43,6 @@ public class NetworkManager : MonoBehaviour {
     {
         Debug.Log("Spawn");
         player = PhotonNetwork.Instantiate(spawnPlayer.name, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation, 0);
-        player = PhotonNetwork.Instantiate(spawnPlayer.name, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation, 0);
         Debug.Log("Spawned");
         index = (index + 1)%spawnPoints.Length;
     }
