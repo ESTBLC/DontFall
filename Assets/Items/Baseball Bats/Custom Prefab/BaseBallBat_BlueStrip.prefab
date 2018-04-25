@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 64330438819129436}
   - component: {fileID: 54522094137463738}
   - component: {fileID: 111964791049892610}
-  - component: {fileID: 114272041109400192}
+  - component: {fileID: 114230806938869824}
   m_Layer: 0
   m_Name: BaseBallBat_BlueStrip
   m_TagString: Weapon
@@ -223,7 +223,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114272041109400192
+--- !u!114 &114230806938869824
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329185602946826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c766bdc60bfca8742908a7cb113f8b82, type: 3}
+  m_Script: {fileID: 11500000, guid: ff34e7f458834284c9490f23704a99da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50

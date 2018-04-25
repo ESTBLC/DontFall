@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -185,7 +185,14 @@ Prefab:
       propertyPath: debugNetwork
       value: 
       objectReference: {fileID: 1279470653}
-    m_RemovedComponents: []
+    - target: {fileID: 114722998648231700, guid: d716c6b20fba5184caa5ac6ba20c361c,
+        type: 2}
+      propertyPath: spawnPlayer
+      value: 
+      objectReference: {fileID: 1243924800689088, guid: 7f5bc5ec65b782d4e9ed82d2545ace56,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d716c6b20fba5184caa5ac6ba20c361c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &487544298
@@ -310,19 +317,18 @@ GameObject:
 --- !u!114 &625716433
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114722998648231700, guid: d716c6b20fba5184caa5ac6ba20c361c,
-    type: 2}
-  m_PrefabInternal: {fileID: 384852770}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 625716432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a17fac46c06074f9d3d11cae17a865, type: 3}
+  m_Script: {fileID: 11500000, guid: 3950f8ac51a741343bf4a578cc4128ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugNetwork: {fileID: 1279470653}
   spawnPoints: []
   spawnTag: SpawnPoint
-  spawnPlayer: {fileID: 1006923991825988, guid: 7f5bc5ec65b782d4e9ed82d2545ace56,
+  spawnPlayer: {fileID: 1537266494518742, guid: 6a0a94fec582f244da22dbfa4f103418,
     type: 2}
 --- !u!4 &625716434
 Transform:
@@ -697,7 +703,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: d1ef903951b81e242aa63d8f6a400f8e, type: 2}
+  - {fileID: 2100000, guid: 90c97610272f1514ab54ffb63474a0da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        lifeText.text = life.ToString();
+        if (photonView.isMine)
+            lifeText.text = life.ToString();
 	}
 
     public void Fire()

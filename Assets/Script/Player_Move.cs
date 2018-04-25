@@ -31,7 +31,7 @@ public class Player_Move : MonoBehaviour
         Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;    //Get actual movement
         Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;       //
 
-        Vector3 moveDirection = new Vector3(Tx + Physics.gravity.x, Physics.gravity.y * Time.deltaTime, Tz + Physics.gravity.z); //Create a new direction vector and apply gravity to it
+        Vector3 moveDirection = new Vector3(Tx, Physics.gravity.y * Time.deltaTime, Tz); //Create a new direction vector and apply gravity to it
 
         if (charController.isGrounded)  //If grounded reset jump counter
             nbJump = 2;
@@ -42,9 +42,9 @@ public class Player_Move : MonoBehaviour
             moveDirection.y += jumpForce;
         }
 
-        CamX += Input.GetAxis("Mouse X") * Time.deltaTime * mouseXAdjust;   //Get actual mouse movement
+        CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
-        CamY += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseYAdjust;   //Get actual mouve movement
+        CamY += Input.GetAxis("Mouse Y") * mouseYAdjust;   //Get actual mouve movement
         CamY = Mathf.Clamp(CamY, -90, 50);  //Clamp to not look too low
 
         moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
