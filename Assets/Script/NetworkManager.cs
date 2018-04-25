@@ -26,11 +26,25 @@ public class NetworkManager : MonoBehaviour {
         debugNetwork.text = PhotonNetwork.connectionStateDetailed.ToString();
 	}
 
+    void OnJoinedLobby()
+    {
+        RoomOptions room = new RoomOptions() { IsVisible = true, MaxPlayers = 10 };
+        PhotonNetwork.JoinOrCreateRoom("Dev", room, TypedLobby.Default);
+        Debug.Log("Lobby");
+    }
+
+    void OnJoinedRoom()
+    {
+        Debug.Log("Room");
+        SpawnPlayer();
+    }
+
     void SpawnPlayer()
     {
         Debug.Log("Spawn");
         player = PhotonNetwork.Instantiate(spawnPlayer.name, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation, 0);
+        Camera.main.gameObject.SetActive(false);
         Debug.Log("Spawned");
-        index = (index + 1)%spawnPoints.Length;
+        index = (index + 1) % spawnPoints.Length;
     }
 }
