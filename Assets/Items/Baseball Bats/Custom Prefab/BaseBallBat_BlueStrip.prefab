@@ -201,7 +201,7 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329185602946826}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
@@ -220,7 +220,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 864246435834bec459061577974d4e68, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114272041109400192
@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  flare: {fileID: 0}
 --- !u!198 &198143165530004240
 ParticleSystem:
   m_ObjectHideFlags: 1

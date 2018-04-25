@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public int life = 0;
     public int shield = 0;
+    public Text lifeText;
     
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();
     [SerializeField] private List<Object> deactivationList = new List<Object>();
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         photonView = GetComponent<PhotonView>();
+        lifeText = GameObject.Find("LifeText").GetComponent<Text>();
         this.name = "Player " + photonView.viewID;
         if (!photonView.isMine)
         {
@@ -32,13 +35,8 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        lifeText.text = life.ToString();
 	}
-
-    public void Destroy()
-    {
-        PhotonNetwork.Destroy(gameObject);
-    }
 
     public void Fire()
     {
@@ -46,11 +44,11 @@ public class Player : MonoBehaviour
     }
 
     [PunRPC]
-    public void TakeDammage(int damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log(this.gameObject.name + " est touché");
+        Debug.Log(this.gameObject.name + " est touche");
         life -= damage;
-        if (life <= 0)
-            Destroy();
+        if (life <= 0 && photonView.isMine)
+            PhotonNetwork.Destroy(gameObject);
     }
 }

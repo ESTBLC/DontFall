@@ -7,7 +7,6 @@ public class Bat : Weapon {
 
     //Use this for initialization
     private bool alreadyHit = false;
-
     public override void Fire()
     {
         GetComponent<Animation>().Play();
@@ -15,7 +14,6 @@ public class Bat : Weapon {
 
     public override void OnTriggerStay(Collider collision)
     {
-
         if (!alreadyHit && GetComponent<Animation>().isPlaying && collision.tag == "Player")
         {
             base.OnTriggerStay(collision);

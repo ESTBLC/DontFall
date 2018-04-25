@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour {
 
     public virtual void OnTriggerStay(Collider collision)
     {
-        collision.gameObject.GetComponent<Player>().TakeDammage(damage);
+        collision.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
     }
 
 }
