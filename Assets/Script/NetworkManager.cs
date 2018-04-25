@@ -17,27 +17,14 @@ public class NetworkManager : MonoBehaviour {
         PhotonNetwork.ConnectUsingSettings("0.1");
         Debug.Log("Network Start");
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);
+        debugNetwork = GameObject.Find("NetworkText").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         debugNetwork.text = PhotonNetwork.connectionStateDetailed.ToString();
 	}
-
-    #region Photon.PunBehaviour CallBacks
-    void OnJoinedLobby()
-    {
-        RoomOptions room = new RoomOptions() { IsVisible = true, MaxPlayers = 10 };
-        PhotonNetwork.JoinOrCreateRoom("Dev", room, TypedLobby.Default);
-        Debug.Log("Lobby");
-    }
-
-    void OnJoinedRoom()
-    {
-        Debug.Log("Room");
-        SpawnPlayer();
-    }
-    #endregion
 
     void SpawnPlayer()
     {
