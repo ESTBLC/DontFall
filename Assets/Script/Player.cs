@@ -8,15 +8,17 @@ public class Player : MonoBehaviour
     public int life = 0;    //Life var
     public int shield = 0;  //Shield var
     public Text lifeText;   //Text to display life
-    
+    public PhotonView photonView;      //Reference to the phontonview component
+
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
     [SerializeField] private List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
-    private PhotonView photonView;      //Reference to the phontonview component
+    private GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
+    private int indexInventory = 0;
 
-    
     void Start ()
     {
+        cam = transform.Find("Camera").gameObject;
         photonView = GetComponent<PhotonView>();                        //Setup the reference to the photonview
         lifeText = GameObject.Find("LifeText").GetComponent<Text>();    //Find the GUI Text to write life to it
         this.name = "Player " + photonView.viewID;      //Rename the player
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
             }
         }
         //inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
-        currentWeapon = inventory[0].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
+        currentWeapon = inventory[indexInventory].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
     }
 	
 	// Update is called once per frame
@@ -42,6 +44,21 @@ public class Player : MonoBehaviour
     public void Fire()
     {
         currentWeapon.Fire();   //Launch fire of the weapon
+    }
+
+    [PunRPC]
+    public void ChangeWeapon(int index)
+    {
+        indexInventory = (indexInventory + index) % inventory.Count;
+        currentWeapon = inventory[indexInventory].GetComponent<Weapon>();
+    }
+
+    public void PickUPWeapon(GameObject toPickUP)
+    {
+        inventory.Add(toPickUP);
+        toPickUP.transform.SetParent(cam.transform);
+        toPickUP.transform.position = toPickUP.GetComponent<Weapon>().origin;
+        toPickUP.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     [PunRPC]

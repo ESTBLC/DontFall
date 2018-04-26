@@ -22,7 +22,7 @@ public class Player_Move : MonoBehaviour
     {
         charController = GetComponent<CharacterController>();   //
         player = GetComponent<Player>();                        //Setup references
-        camera = this.transform.Find("Camera").gameObject;      //
+        camera = transform.Find("Camera").gameObject;      //
 
         //charController.angularDrag = float.MaxValue; //ugly fix rotation
     }
@@ -56,6 +56,32 @@ public class Player_Move : MonoBehaviour
         if (Input.GetButton("Fire1")) //Launch fire action
         {
             player.Fire();
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            player.photonView.RPC("ChangeWeapon", PhotonTargets.All, 1);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            player.photonView.RPC("ChangeWeapon", PhotonTargets.All, -1);
+        }
+
+        if (Input.GetButton("Interact"))
+        {
+            Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                
+                if (hit.collider.tag == "Weapon")
+                {
+                    Debug.Log("A weapon as been hit");
+                    player.PickUPWeapon(hit.collider.gameObject);
+                }
+            }
         }
     }
 }

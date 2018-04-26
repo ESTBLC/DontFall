@@ -7,7 +7,8 @@ public class Weapon : MonoBehaviour
 {
 
     // Use this for initialization
-    [SerializeField] private int damage; //Store damage of the weapon
+    public int damage; //Store damage of the weapon
+    public Vector3 origin;
 
     public virtual void Start()
     {
@@ -21,7 +22,12 @@ public class Weapon : MonoBehaviour
 
     public virtual void OnTriggerStay(Collider collision)
     {
-        collision.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);   //Apply damage
+        
+    }
+
+    public virtual void ApplyDamage(GameObject gameObject)
+    {
+        gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);   //Apply damage
     }
 
 }

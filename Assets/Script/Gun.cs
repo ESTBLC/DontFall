@@ -1,33 +1,19 @@
 ﻿
 using UnityEngine;
 
-public class Gun : MonoBehaviour {
+public class Gun : Weapon {
 
     // Use this for initialization
-    public float damage = 10f;
-    public float range = 100f;
-
-    public ParticleSystem Shoot_particule;
-    public Camera cam;
+    public int range;
+    public int speed;
+    [SerializeField] GameObject bullet;
     
 	// Update is called once per frame
-	void Update ()
+	public override void Fire()
     {
-		if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
-	}
-
-    void Shoot()
-    {
-        Shoot_particule.Play();
-        RaycastHit hit;        
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
-        {
-            // Ca fait rien pour l'instant
-
-            Debug.Log(hit.transform.position);
-        }
+        GameObject bulletSpawn = Object.Instantiate(bullet, bullet.transform.position, bullet.transform.rotation, transform);
+        bulletSpawn.SetActive(true);
+        bulletSpawn.GetComponent<Rigidbody>().velocity = new Vector3(0, speed, 0);
+        bulletSpawn.GetComponent<Bullet>().FireBullet(damage, range, transform.position);
     }
 }

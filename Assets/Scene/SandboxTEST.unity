@@ -27087,7 +27087,7 @@ GameObject:
   - component: {fileID: 908988334}
   - component: {fileID: 908988333}
   m_Layer: 0
-  m_Name: Camera (1)
+  m_Name: MiniMapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55454,7 +55454,7 @@ Prefab:
         type: 2}
       propertyPath: spawnPlayer
       value: 
-      objectReference: {fileID: 1847016521528504, guid: 6a0a94fec582f244da22dbfa4f103418,
+      objectReference: {fileID: 1536771346501664, guid: 6a0a94fec582f244da22dbfa4f103418,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d57539d0a5156f42a1ba6c2cc225958, type: 2}

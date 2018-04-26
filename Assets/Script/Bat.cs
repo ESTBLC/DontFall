@@ -26,12 +26,12 @@ public class Bat : Weapon {
         if (!alreadyHit && anim.isPlaying && collision.tag == "Player") //Check if we realy need to aplly dammage
         {
             spark.Play();                   //Launch the particulesystem
-            base.OnTriggerStay(collision);  //Apply damage
+            ApplyDamage(collision.gameObject);         //Apply damage
             alreadyHit = true;              //
         }        
     }
 
-    public void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         alreadyHit = false; //
     }

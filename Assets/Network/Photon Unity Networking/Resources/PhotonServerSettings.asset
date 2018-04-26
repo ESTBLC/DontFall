@@ -37,4 +37,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TakeDamage
+  - ChangeWeapon
   DisableAutoOpenWizard: 1
