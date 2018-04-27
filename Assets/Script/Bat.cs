@@ -14,6 +14,7 @@ public class Bat : Weapon {
     {
         anim = GetComponent<Animation>();                   //Find the animation
         spark = GetComponentInChildren<ParticleSystem>();   //Find the particulesystem
+        base.Start();
     }
 
     public override void Fire()

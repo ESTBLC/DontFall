@@ -11,9 +11,10 @@ public class Gun : Weapon {
 	// Update is called once per frame
 	public override void Fire()
     {
-        GameObject bulletSpawn = Object.Instantiate(bullet, bullet.transform.position, bullet.transform.rotation, transform);
-        bulletSpawn.SetActive(true);
-        bulletSpawn.GetComponent<Rigidbody>().velocity = new Vector3(0, speed, 0);
+
+        GameObject bulletSpawn = PhotonNetwork.Instantiate(bullet.name, bullet.transform.position, bullet.transform.rotation, 0);
+        //bulletSpawn.SetActive(true);
+        bulletSpawn.GetComponent<Rigidbody>().velocity = Camera.current.transform.forward*speed;
         bulletSpawn.GetComponent<Bullet>().FireBullet(damage, range, transform.position);
     }
 }

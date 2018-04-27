@@ -38,4 +38,9 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TakeDamage
   - ChangeWeapon
+  - PickUPWeapon
+  - DesactivateCurrentWeapon
+  - DesactivateWeapon
+  - DestroyGO
+  - PickUPWeaponRPC
   DisableAutoOpenWizard: 1

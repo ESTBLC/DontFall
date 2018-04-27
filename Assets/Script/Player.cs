@@ -9,17 +9,20 @@ public class Player : MonoBehaviour
     public int shield = 0;  //Shield var
     public Text lifeText;   //Text to display life
     public PhotonView photonView;      //Reference to the phontonview component
+    public int id;
 
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
     [SerializeField] private List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
     private GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
     private int indexInventory = 0;
+    private bool canShoot = true;
 
     void Start ()
     {
         cam = transform.Find("Camera").gameObject;
         photonView = GetComponent<PhotonView>();                        //Setup the reference to the photonview
+        id = photonView.viewID;
         lifeText = GameObject.Find("LifeText").GetComponent<Text>();    //Find the GUI Text to write life to it
         this.name = "Player " + photonView.viewID;      //Rename the player
         if (!photonView.isMine) //If the player is not the local player launch the desactivation of different component
@@ -43,7 +46,18 @@ public class Player : MonoBehaviour
 
     public void Fire()
     {
+        if (!canShoot)
+            return;
         currentWeapon.Fire();   //Launch fire of the weapon
+        StartCoroutine(CoolDown());
+    }
+    
+    IEnumerator CoolDown()
+    {
+        canShoot = false;
+        Debug.Log("CoolDown");
+        yield return new WaitForSeconds(currentWeapon.coolDown);
+        canShoot = true;
     }
 
     [PunRPC]
@@ -53,12 +67,35 @@ public class Player : MonoBehaviour
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();
     }
 
-    public void PickUPWeapon(GameObject toPickUP)
+    public void PickUPWeapon(GameObject weapon)
     {
-        inventory.Add(toPickUP);
-        toPickUP.transform.SetParent(cam.transform);
-        toPickUP.transform.position = toPickUP.GetComponent<Weapon>().origin;
-        toPickUP.GetComponent<Rigidbody>().isKinematic = false;
+        string name = weapon.GetComponent<Weapon>().PrefabName();
+        int id = weapon.GetComponent<PhotonView>().viewID;
+        //weapon.GetComponent<PhotonView>().TransferOwnership(id);
+        photonView.RPC("DestroyGO", PhotonTargets.All, id);
+        weapon = PhotonNetwork.Instantiate(name, transform.position, Quaternion.identity, 0);
+        id = weapon.GetComponent<PhotonView>().viewID;
+        photonView.RPC("PickUPWeaponRPC", PhotonTargets.All, id);
+    }
+
+    [PunRPC]
+    private void PickUPWeaponRPC(int id)
+    {
+        GameObject weapon = PhotonView.Find(id).gameObject;
+        weapon.transform.SetParent(cam.transform);
+        weapon.GetComponent<Weapon>().DesactivatePhysic();
+        weapon.transform.localPosition = weapon.GetComponent<Weapon>().origin;
+        weapon.transform.localRotation = Quaternion.identity;
+        inventory.Add(weapon);
+        indexInventory = inventory.Count - 1;
+        currentWeapon.gameObject.SetActive(false);
+        currentWeapon = weapon.GetComponent<Weapon>();
+    }
+
+    [PunRPC]
+    public void DestroyGO(int id)
+    {
+        Destroy(PhotonView.Find(id).gameObject);
     }
 
     [PunRPC]

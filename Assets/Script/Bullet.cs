@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bullet : Weapon {
 
-    private Vector3 origin;
     private int maxDist;
     // Use this for initialization
     public void FireBullet(int damage, int maxDist, Vector3 origin)
@@ -16,7 +15,7 @@ public class Bullet : Weapon {
 
     private void Update()
     {
-        if (Vector3.Distance(origin, transform.position) > maxDist)
+        if (GetComponent<PhotonView>().isMine && Vector3.Distance(origin, transform.position) > maxDist)
             PhotonNetwork.Destroy(gameObject);
     }
 

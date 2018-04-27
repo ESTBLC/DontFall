@@ -22,10 +22,11 @@ public class Player_Move : MonoBehaviour
     {
         charController = GetComponent<CharacterController>();   //
         player = GetComponent<Player>();                        //Setup references
-        camera = transform.Find("Camera").gameObject;      //
+        camera = transform.Find("Camera").gameObject;           //
 
         //charController.angularDrag = float.MaxValue; //ugly fix rotation
     }
+
     void Update()
     {
         Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;    //Get actual movement
@@ -78,8 +79,7 @@ public class Player_Move : MonoBehaviour
                 
                 if (hit.collider.tag == "Weapon")
                 {
-                    Debug.Log("A weapon as been hit");
-                    player.PickUPWeapon(hit.collider.gameObject);
+                    player.PickUPWeapon(hit.collider.transform.parent.gameObject);
                 }
             }
         }
