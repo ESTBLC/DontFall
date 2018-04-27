@@ -30,7 +30,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider obj)
     {
-        if (obj.transform.name == "Player 1" || obj.transform.name == "Player 2")
+        if (obj.tag == "Player")
         {
             opening = true;
             closing = false;
@@ -41,7 +41,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider obj)
     {
-        if (obj.transform.name == "Player 1" || obj.transform.name == "Player 2")
+        if (obj.tag == "Player")
         {
             opening = false;
             closing = true;

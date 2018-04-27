@@ -22,17 +22,18 @@ public class Bat : Weapon {
         anim.Play();    //Play the animation
     }
 
-    public override void OnTriggerStay(Collider collision)
+    void OnCollisionStay(Collision collisionInfo)
     {
-        if (!alreadyHit && anim.isPlaying && collision.tag == "Player") //Check if we realy need to aplly dammage
+        GameObject obj = collisionInfo.collider.gameObject;
+        if (!alreadyHit && anim.isPlaying && obj.tag == "Player") //Check if we realy need to aplly dammage
         {
             spark.Play();                   //Launch the particulesystem
-            ApplyDamage(collision.gameObject);         //Apply damage
+            ApplyDamage(obj);               //Apply damage
             alreadyHit = true;              //
         }        
     }
 
-    void OnTriggerExit(Collider other)
+    void OnCollisionExit(Collision collisionInfo)
     {
         alreadyHit = false; //
     }

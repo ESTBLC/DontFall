@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int life = 0;    //Life var
-    public int shield = 0;  //Shield var
+    public int life;        //Life var
+    public int shield;      //Shield var
+    public int dropForce;   //DropForce var
     public Text lifeText;   //Text to display life
     public PhotonView photonView;      //Reference to the phontonview component
     public int id;
+    public List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
+    public List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
 
-    [SerializeField] private List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
-    [SerializeField] private List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
     private GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
     private int indexInventory = 0;
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour
                 Destroy(deactivationList[i]);
             }
         }
-        //inventory.Add(GameObject.FindGameObjectsWithTag("Weapon")[0]);
+        inventory.Add(GetComponentInChildren<Weapon>().gameObject);
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
     }
 	
@@ -63,23 +64,14 @@ public class Player : MonoBehaviour
     [PunRPC]
     public void ChangeWeapon(int index)
     {
-        indexInventory = (indexInventory + index) % inventory.Count;
+        indexInventory = (indexInventory + index + inventory.Count) % inventory.Count;
+        currentWeapon.gameObject.SetActive(false);
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();
-    }
-
-    public void PickUPWeapon(GameObject weapon)
-    {
-        string name = weapon.GetComponent<Weapon>().PrefabName();
-        int id = weapon.GetComponent<PhotonView>().viewID;
-        //weapon.GetComponent<PhotonView>().TransferOwnership(id);
-        photonView.RPC("DestroyGO", PhotonTargets.All, id);
-        weapon = PhotonNetwork.Instantiate(name, transform.position, Quaternion.identity, 0);
-        id = weapon.GetComponent<PhotonView>().viewID;
-        photonView.RPC("PickUPWeaponRPC", PhotonTargets.All, id);
+        currentWeapon.gameObject.SetActive(true);
     }
 
     [PunRPC]
-    private void PickUPWeaponRPC(int id)
+    private void PickUPWeapon(int id)
     {
         GameObject weapon = PhotonView.Find(id).gameObject;
         weapon.transform.SetParent(cam.transform);
@@ -90,6 +82,20 @@ public class Player : MonoBehaviour
         indexInventory = inventory.Count - 1;
         currentWeapon.gameObject.SetActive(false);
         currentWeapon = weapon.GetComponent<Weapon>();
+    }
+
+    [PunRPC]
+    public void DropWeapon()
+    {
+        if (indexInventory != 0)
+        {
+            inventory.RemoveAt(indexInventory);
+            currentWeapon.transform.SetParent(null);
+            currentWeapon.ActivatePhysic();
+            currentWeapon.gameObject.GetComponent<Rigidbody>().velocity = cam.transform.forward * dropForce;
+            currentWeapon.gameObject.GetComponent<PhotonView>().TransferOwnership(0);
+            currentWeapon = inventory[inventory.Count - 1].GetComponent<Weapon>();
+        }
     }
 
     [PunRPC]

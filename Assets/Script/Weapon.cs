@@ -10,7 +10,6 @@ public class Weapon : MonoBehaviour
     public int damage; //Store damage of the weapon
     public float coolDown;
     public Vector3 origin;
-    public GameObject prefab;
 
     public virtual void Start()
     {
@@ -22,26 +21,16 @@ public class Weapon : MonoBehaviour
         
     }
 
-    public virtual void OnTriggerStay(Collider collision)
-    {
-        
-    }
-
-    public void DesactivatePhysic()
+    public virtual void DesactivatePhysic()
     {
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    public void ActivatePhysic()
+    public virtual void ActivatePhysic()
     {
         GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().isKinematic = false;
-    }
-
-    public string PrefabName()
-    {
-        return prefab.name;
     }
 
     public virtual void ApplyDamage(GameObject gameObject)

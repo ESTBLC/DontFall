@@ -129,7 +129,7 @@ Prefab:
         type: 2}
       propertyPath: spawnPlayer
       value: 
-      objectReference: {fileID: 1712114381598908, guid: 6a0a94fec582f244da22dbfa4f103418,
+      objectReference: {fileID: 1027145005113458, guid: 6a0a94fec582f244da22dbfa4f103418,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d57539d0a5156f42a1ba6c2cc225958, type: 2}
@@ -634,6 +634,15 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114104709017701778, guid: 119551172e2002344983c075ab97ef79,
+        type: 2}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652929229506800, guid: 119551172e2002344983c075ab97ef79, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 119551172e2002344983c075ab97ef79, type: 2}

@@ -68,7 +68,7 @@ public class Player_Move : MonoBehaviour
             player.photonView.RPC("ChangeWeapon", PhotonTargets.All, -1);
         }
 
-        if (Input.GetButton("Interact"))
+        if (Input.GetButtonDown("Interact"))
         {
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
             RaycastHit hit;
@@ -79,9 +79,17 @@ public class Player_Move : MonoBehaviour
                 
                 if (hit.collider.tag == "Weapon")
                 {
-                    player.PickUPWeapon(hit.collider.transform.parent.gameObject);
+                    GameObject weapon = hit.collider.transform.parent.gameObject;
+                    weapon.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
+                    int id = weapon.GetComponent<PhotonView>().viewID;
+                    player.photonView.RPC("PickUPWeapon", PhotonTargets.All, id);
                 }
             }
+        }
+
+        if (Input.GetButtonDown("Drop Weapon"))
+        {
+            player.photonView.RPC("DropWeapon", PhotonTargets.All);
         }
     }
 }
