@@ -49,59 +49,52 @@ public class Player : MonoBehaviour
     {
         if (!canShoot)
             return;
-        currentWeapon.Fire();   //Launch fire of the weapon
-        StartCoroutine(CoolDown());
+        currentWeapon.Fire();           //Launch fire of the weapon
+        StartCoroutine(CoolDown());     //Apply cooldown to keep a rate of fire
     }
     
-    IEnumerator CoolDown()
+    IEnumerator CoolDown()      //Rate of fire regulator
     {
-        canShoot = false;
-        Debug.Log("CoolDown");
-        yield return new WaitForSeconds(currentWeapon.coolDown);
-        canShoot = true;
+        canShoot = false;       //Desactivate shoot possibilities
+        yield return new WaitForSeconds(currentWeapon.coolDown);    //Wait for the cooldown to end
+        canShoot = true;        //Activate shoot possibilities
     }
 
     [PunRPC]
-    public void ChangeWeapon(int index)
+    public void ChangeWeapon(int index) //CHange active weapon of the inventory
     {
-        indexInventory = (indexInventory + index + inventory.Count) % inventory.Count;
-        currentWeapon.gameObject.SetActive(false);
-        currentWeapon = inventory[indexInventory].GetComponent<Weapon>();
-        currentWeapon.gameObject.SetActive(true);
+        indexInventory = (indexInventory + index + inventory.Count) % inventory.Count;  //Change the index for the futur activation
+        currentWeapon.gameObject.SetActive(false);                                      //Desactivate old weapon
+        currentWeapon = inventory[indexInventory].GetComponent<Weapon>();               //Change current weapon
+        currentWeapon.gameObject.SetActive(true);                                       //Activate new weapon
     }
 
     [PunRPC]
-    private void PickUPWeapon(int id)
+    private void PickUPWeapon(int id)   //Collect and equip a weapon
     {
-        GameObject weapon = PhotonView.Find(id).gameObject;
-        weapon.transform.SetParent(cam.transform);
-        weapon.GetComponent<Weapon>().DesactivatePhysic();
-        weapon.transform.localPosition = weapon.GetComponent<Weapon>().origin;
-        weapon.transform.localRotation = Quaternion.identity;
-        inventory.Add(weapon);
-        indexInventory = inventory.Count - 1;
-        currentWeapon.gameObject.SetActive(false);
-        currentWeapon = weapon.GetComponent<Weapon>();
+        GameObject weapon = PhotonView.Find(id).gameObject;                     //Find the weapon to collect
+        weapon.transform.SetParent(cam.transform);                              //Set it as a child of the cam
+        weapon.GetComponent<Weapon>().DesactivatePhysic();                      //Desactivate physic effect on it
+        weapon.transform.localPosition = weapon.GetComponent<Weapon>().origin;  //Place the weapon on the right localpoint 
+        weapon.transform.localRotation = Quaternion.identity;                   //Reset the rotation
+        inventory.Add(weapon);                                                  //Add the weapon to the inventory
+        indexInventory = inventory.Count - 1;                                   //Set the index to the end of the inventory list
+        currentWeapon.gameObject.SetActive(false);                              //Desactivate old weapon
+        currentWeapon = weapon.GetComponent<Weapon>();                          //Change the currentWeapon to the new one
     }
 
     [PunRPC]
-    public void DropWeapon()
+    public void DropWeapon()    //Drop the weapon on the scene
     {
-        if (indexInventory != 0)
+        if (indexInventory != 0)    //Block bat drop
         {
-            inventory.RemoveAt(indexInventory);
-            currentWeapon.transform.SetParent(null);
-            currentWeapon.ActivatePhysic();
-            currentWeapon.gameObject.GetComponent<Rigidbody>().velocity = cam.transform.forward * dropForce;
-            currentWeapon.gameObject.GetComponent<PhotonView>().TransferOwnership(0);
-            currentWeapon = inventory[inventory.Count - 1].GetComponent<Weapon>();
+            inventory.RemoveAt(indexInventory);                                                                 //Remove it of the inventory
+            currentWeapon.transform.SetParent(null);                                                            //Set it with no parent
+            currentWeapon.ActivatePhysic();                                                                     //Activate physic effect on it
+            currentWeapon.gameObject.GetComponent<Rigidbody>().velocity = cam.transform.forward * dropForce;    //Apply a drop force
+            currentWeapon.gameObject.GetComponent<PhotonView>().TransferOwnership(0);                           //Loose the ownership
+            currentWeapon = inventory[inventory.Count - 1].GetComponent<Weapon>();                              //Take an other weapon
         }
-    }
-
-    [PunRPC]
-    public void DestroyGO(int id)
-    {
-        Destroy(PhotonView.Find(id).gameObject);
     }
 
     [PunRPC]
@@ -110,6 +103,9 @@ public class Player : MonoBehaviour
         Debug.Log(this.gameObject.name + " est touche");
         life -= damage; //Substract life
         if (life <= 0 && photonView.isMine) //Destroy if the player is the local player
-            PhotonNetwork.Destroy(gameObject);  //Destroy the player across the network
+        {
+            //Camera.main.gameObject.SetActive(true); //Enable the main camera to keep one camera up
+            PhotonNetwork.Destroy(gameObject);      //Destroy the player across the network
+        }
     }
 }

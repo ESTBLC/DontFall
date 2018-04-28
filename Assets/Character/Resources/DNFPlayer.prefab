@@ -558,7 +558,6 @@ MonoBehaviour:
   damage: 50
   coolDown: 0
   origin: {x: 0, y: 0, z: 0}
-  prefab: {fileID: 0}
 --- !u!114 &114593665822983438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -572,7 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   shield: 0
-  dropForce: 3
+  dropForce: 5
   lifeText: {fileID: 0}
   photonView: {fileID: 0}
   id: 0

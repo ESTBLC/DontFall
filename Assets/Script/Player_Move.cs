@@ -76,8 +76,8 @@ public class Player_Move : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 Debug.DrawLine(ray.origin, hit.point);
-                
-                if (hit.collider.tag == "Weapon")
+                int ownerID = hit.collider.transform.parent.gameObject.GetComponent<PhotonView>().ownerId;
+                    if (hit.collider.tag == "Weapon" && (ownerID == 1 || ownerID == 0))
                 {
                     GameObject weapon = hit.collider.transform.parent.gameObject;
                     weapon.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
