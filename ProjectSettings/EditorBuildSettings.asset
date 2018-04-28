@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scene/menu2.unity
+    guid: c3d8e6f8e40dba14f901279184ec1a79
   - enabled: 1
-    path: Assets/menu2.unity
-    guid: 03e8d4d51fa06c74380e861076506183
-  - enabled: 1
-    path: Assets/SandboxTEST.unity
-    guid: d4ed7f900cf881b42911f24a07c2d0d7
-  - enabled: 1
-    path: Assets/SandboxTEST-Solo.unity
-    guid: ef2d1364c1b6fc84eaa8638f591f9459
+    path: Assets/Scene/Sandbox.unity
+    guid: 77d95796891dc8f42b924cdd63d0dead
+  - enabled: 0
+    path: Assets/Scene/SandboxTEST.unity
+    guid: c3b597417600af641b246e9e6d2f6e80

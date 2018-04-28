@@ -3,10 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Mob
-  - Ground
-  - Weapon
+  tags: []
   layers:
   - Default
   - TransparentFX
