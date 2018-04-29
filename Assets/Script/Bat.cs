@@ -24,10 +24,10 @@ public class Bat : Weapon {
 
     void OnCollisionStay(Collision collisionInfo)
     {
+        spark.Play();   //Launch the particulesystem
         GameObject obj = collisionInfo.collider.gameObject;
         if (!alreadyHit && anim.isPlaying && obj.tag == "Player") //Check if we realy need to aplly dammage
         {
-            spark.Play();                   //Launch the particulesystem
             ApplyDamage(obj);               //Apply damage
             alreadyHit = true;              //
         }        
