@@ -33,8 +33,8 @@ public class Weapon : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
     }
 
-    public virtual void ApplyDamage(GameObject gameObject)
+    public virtual void ApplyDamage(GameObject gameObject, Vector3 point)
     {
-        gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);   //Apply damage
+        gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage, point);   //Apply damage
     }
 }

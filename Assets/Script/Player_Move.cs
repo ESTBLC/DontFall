@@ -34,7 +34,7 @@ public class Player_Move : MonoBehaviour
         Tz = Input.GetAxis("Vertical") * forwbacwAdjust;       //
         Ty = rigid.velocity.y;
 
-        Vector3 moveDirection = new Vector3(Tx, Ty, Tz); //Create a new direction vector and apply gravity to it
+        Vector3 moveDirection = new Vector3(Tx, Ty, Tz) + player.impactForce; //Create a new direction vector and apply gravity to it
 
         moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
         rigid.velocity = moveDirection;                                 //
@@ -53,7 +53,6 @@ public class Player_Move : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && nbJumpLeft > 0)  //Jump and -1 to jump counter
         {
-            Debug.Log("Test");
             nbJumpLeft--;
             Vector3 vel = rigid.velocity;
             vel.y = 0;

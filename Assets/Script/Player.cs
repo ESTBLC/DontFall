@@ -6,14 +6,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int life;        //Life var
-    public int shield;      //Shield var
+    public float shield = 1;      //Shield var
     public int dropForce;   //DropForce var
     public Text lifeText;   //Text to display life
     public PhotonView photonView;      //Reference to the phontonview component
     public int id;
     public List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
     public List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
+    public Vector3 impactForce;
 
+    [SerializeField] private float decreaseForce;
     private GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
     private int indexInventory = 0;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
             {
                 Destroy(deactivationList[i]);
             }
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
         inventory.Add(GetComponentInChildren<Weapon>().gameObject);
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
@@ -41,8 +44,12 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (photonView.isMine)                  //Update the GUI life is the player is the local player
-            lifeText.text = life.ToString();    //Write life to it
+        if (!photonView.isMine)                  //Update the GUI life is the player is the local player
+            return;
+        lifeText.text = life.ToString();    //Write life to it
+        impactForce *= decreaseForce;
+        if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
+            impactForce = Vector3.zero;
 	}
 
     public void Fire()
@@ -98,14 +105,12 @@ public class Player : MonoBehaviour
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)  //Apply damge to all reference of the player accros the network
+    public void TakeDamage(int damage, Vector3 point)  //Apply damge to all reference of the player accros the network
     {
         Debug.Log(this.gameObject.name + " est touche");
-        life -= damage; //Substract life
-        if (life <= 0 && photonView.isMine) //Destroy if the player is the local player
+        if (photonView.isMine)
         {
-            //Camera.main.gameObject.SetActive(true); //Enable the main camera to keep one camera up
-            PhotonNetwork.Destroy(gameObject);      //Destroy the player across the network
+            impactForce += (transform.position - point)*damage*shield;
         }
     }
 }
