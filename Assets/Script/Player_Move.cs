@@ -10,49 +10,56 @@ public class Player_Move : MonoBehaviour
     public float jumpForce;         //
     public int nbJump;              //Number of jump
 
-    private CharacterController charController; //CharacterController component reference
+    private Rigidbody rigid;                    //CharacterController component reference
     private GameObject camera;                  //Child GameObject Camera reference
     private Player player;
     private float Tx;                           //Actual movement variables
     private float Tz;                           //
+    private float Ty;
     private float CamX;                         //
     private float CamY;                         //
+    private int nbJumpLeft;
 
-    private void Start()
+    void Start()
     {
-        charController = GetComponent<CharacterController>();   //
-        player = GetComponent<Player>();                        //Setup references
-        camera = transform.Find("Camera").gameObject;           //
+        rigid = GetComponent<Rigidbody>();   //
+        player = GetComponent<Player>();                //Setup references
+        camera = transform.Find("Camera").gameObject;   //
+        nbJumpLeft = nbJump;
+    }
 
-        //charController.angularDrag = float.MaxValue; //ugly fix rotation
+    void FixedUpdate()
+    {
+        Tx = Input.GetAxis("Horizontal") * leftrightAdjust;    //Get actual movement
+        Tz = Input.GetAxis("Vertical") * forwbacwAdjust;       //
+        Ty = rigid.velocity.y;
+
+        Vector3 moveDirection = new Vector3(Tx, Ty, Tz); //Create a new direction vector and apply gravity to it
+
+        moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
+        rigid.velocity = moveDirection;                                 //
     }
 
     void Update()
     {
-        Tx = Input.GetAxis("Horizontal") * Time.deltaTime * leftrightAdjust;    //Get actual movement
-        Tz = Input.GetAxis("Vertical") * Time.deltaTime * forwbacwAdjust;       //
-
-        Vector3 moveDirection = new Vector3(Tx, Physics.gravity.y * Time.deltaTime, Tz); //Create a new direction vector and apply gravity to it
-
-        if (charController.isGrounded)  //If grounded reset jump counter
-            nbJump = 2;
-
-        if (Input.GetButtonDown("Jump") && nbJump > 0)  //Jump and -1 to jump counter
-        {
-            nbJump--;
-            moveDirection.y += jumpForce;
-        }
-
         CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
         CamY += Input.GetAxis("Mouse Y") * mouseYAdjust;   //Get actual mouve movement
         CamY = Mathf.Clamp(CamY, -90, 50);  //Clamp to not look too low
 
-        moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
-        charController.Move(moveDirection);                             //
-		transform.Rotate(0, CamX, 0);                                   //Make the rotation
+        transform.Rotate(0, CamX, 0);                                   //Make the rotation
         transform.localEulerAngles = new Vector3(0, CamX, 0);                                                                               //
         camera.transform.localEulerAngles = new Vector3(CamY, camera.transform.localEulerAngles.y, camera.transform.localEulerAngles.z);    //Black magic
+
+        if (Input.GetButtonDown("Jump") && nbJumpLeft > 0)  //Jump and -1 to jump counter
+        {
+            Debug.Log("Test");
+            nbJumpLeft--;
+            Vector3 vel = rigid.velocity;
+            vel.y = 0;
+            rigid.velocity = vel;
+            rigid.AddForce(new Vector3(0, jumpForce, 0), ForceMode.VelocityChange);
+        }
 
         if (Input.GetButton("Fire1")) //Launch fire action
         {
@@ -77,7 +84,7 @@ public class Player_Move : MonoBehaviour
             {
                 Debug.DrawLine(ray.origin, hit.point);
                 int ownerID = hit.collider.transform.parent.gameObject.GetComponent<PhotonView>().ownerId;
-                    if (hit.collider.tag == "Weapon" && (ownerID == 1 || ownerID == 0))
+                if (hit.collider.tag == "Weapon" && (ownerID == 1 || ownerID == 0))
                 {
                     GameObject weapon = hit.collider.transform.parent.gameObject;
                     weapon.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
@@ -92,6 +99,10 @@ public class Player_Move : MonoBehaviour
             player.photonView.RPC("DropWeapon", PhotonTargets.All);
         }
     }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Ground")
+            nbJumpLeft = nbJump;
+    }
 }
-
-
