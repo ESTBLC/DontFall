@@ -14,7 +14,7 @@ public class NetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         PhotonNetwork.logLevel = PhotonLogLevel.Full;                           //Set debug level of Photon
-        PhotonNetwork.ConnectUsingSettings("0.1");                              //Connect to server
+        PhotonNetwork.ConnectUsingSettings("0.2");                              //Connect to server
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);              //Find spawn points and put them on the array
         debugNetwork = GameObject.Find("NetworkText").GetComponent<Text>();     //Find the GUI text for debug network
 	}

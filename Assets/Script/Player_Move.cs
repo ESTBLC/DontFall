@@ -79,7 +79,7 @@ public class Player_Move : MonoBehaviour
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 4))
             {
                 Debug.DrawLine(ray.origin, hit.point);
                 int ownerID = hit.collider.transform.parent.gameObject.GetComponent<PhotonView>().ownerId;

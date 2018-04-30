@@ -15,7 +15,7 @@ public class Gun : Weapon {
             return;
         GameObject bulletSpawn = PhotonNetwork.Instantiate(bullet.name, bullet.transform.position, bullet.transform.rotation, 0);
         //bulletSpawn.SetActive(true);
-        bulletSpawn.AddComponent<Rigidbody>().AddForce(Camera.current.transform.forward*speed, ForceMode.VelocityChange);
+        bulletSpawn.AddComponent<Rigidbody>().AddForce(transform.parent.transform.forward * speed, ForceMode.VelocityChange);
         bulletSpawn.GetComponent<Bullet>().FireBullet(damage, range, transform.position);
         base.Fire();
     }
