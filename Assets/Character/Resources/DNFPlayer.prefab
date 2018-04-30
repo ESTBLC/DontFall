@@ -556,6 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   coolDown: 0
+  timer: 0
   origin: {x: 0, y: 0, z: 0}
 --- !u!114 &114160176502644654
 MonoBehaviour:
@@ -607,7 +608,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ExtrapolateOption: 2
+    ExtrapolateOption: 1
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
@@ -692,7 +693,7 @@ MonoBehaviour:
   - {fileID: 81989610834276434}
   - {fileID: 114166458624879820}
   impactForce: {x: 0, y: 0, z: 0}
-  decreaseForce: 0.5
+  decreaseForce: 0.8
 --- !u!124 &124241881170766272
 Behaviour:
   m_ObjectHideFlags: 1

@@ -100,7 +100,8 @@ public class Player : MonoBehaviour
         Debug.Log(this.gameObject.name + " est touche");
         if (photonView.isMine)
         {
-            impactForce += (transform.position - point)*damage*shield;
+            impactForce = (transform.position - point)*damage*shield;
+            impactForce.y = 0;
         }
     }
 }
