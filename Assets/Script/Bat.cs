@@ -28,7 +28,7 @@ public class Bat : Weapon {
         GameObject obj = collisionInfo.collider.gameObject;
         if (!alreadyHit && anim.isPlaying && obj.tag == "Player") //Check if we realy need to aplly dammage
         {
-            ApplyDamage(obj);               //Apply damage
+            ApplyDamage(obj, collisionInfo.contacts[0].point);               //Apply damage
             alreadyHit = true;              //
         }        
     }
