@@ -9,28 +9,35 @@ public class Weapon : MonoBehaviour
     // Use this for initialization
     public int damage; //Store damage of the weapon
     public float coolDown;
+    public float timer;
     public Vector3 origin;
+ 
+    private Rigidbody rigid;
 
     public virtual void Start()
     {
         //GameObject.Find("Game Manager").GetComponent<PhotonView>().ObservedComponents.Add(gameObject.transform);
+        rigid = GetComponent<Rigidbody>();
+    }
+
+    public virtual void Update()
+    {
+        timer -= Time.deltaTime;
     }
 
     public virtual void Fire()
     {
-        
+        timer = coolDown;
     }
 
     public virtual void DesactivatePhysic()
     {
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().isKinematic = true;
+        Destroy(rigid);
     }
 
     public virtual void ActivatePhysic()
     {
-        GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<Rigidbody>().isKinematic = false;
+        rigid = gameObject.AddComponent<Rigidbody>();
     }
 
     public virtual void ApplyDamage(GameObject gameObject, Vector3 point)

@@ -54,19 +54,9 @@ public class Player : MonoBehaviour
 
     public void Fire()
     {
-        if (!canShoot)
-            return;
         currentWeapon.Fire();           //Launch fire of the weapon
-        StartCoroutine(CoolDown());     //Apply cooldown to keep a rate of fire
     }
     
-    IEnumerator CoolDown()      //Rate of fire regulator
-    {
-        canShoot = false;       //Desactivate shoot possibilities
-        yield return new WaitForSeconds(currentWeapon.coolDown);    //Wait for the cooldown to end
-        canShoot = true;        //Activate shoot possibilities
-    }
-
     [PunRPC]
     public void ChangeWeapon(int index) //CHange active weapon of the inventory
     {

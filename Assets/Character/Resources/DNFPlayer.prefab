@@ -637,7 +637,7 @@ MonoBehaviour:
   leftrightAdjust: 4
   mouseXAdjust: 10
   mouseYAdjust: 10
-  jumpForce: 10
+  jumpForce: 5
   nbJump: 2
 --- !u!114 &114299075071423504
 MonoBehaviour:

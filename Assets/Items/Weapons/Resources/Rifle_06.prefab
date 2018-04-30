@@ -785,7 +785,6 @@ MonoBehaviour:
   damage: 20
   coolDown: 0.2
   origin: {x: 0.476, y: -0.205, z: 0.578}
-  prefab: {fileID: 1652929229506800}
   range: 50
   speed: 20
   bullet: {fileID: 1818888556816120}
@@ -803,7 +802,6 @@ MonoBehaviour:
   damage: 0
   coolDown: 0
   origin: {x: 0, y: 0, z: 0}
-  prefab: {fileID: 0}
 --- !u!114 &114296444337252852
 MonoBehaviour:
   m_ObjectHideFlags: 1

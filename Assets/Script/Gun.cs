@@ -11,10 +11,30 @@ public class Gun : Weapon {
 	// Update is called once per frame
 	public override void Fire()
     {
-
+        if (timer > 0)
+            return;
         GameObject bulletSpawn = PhotonNetwork.Instantiate(bullet.name, bullet.transform.position, bullet.transform.rotation, 0);
         //bulletSpawn.SetActive(true);
-        bulletSpawn.GetComponent<Rigidbody>().velocity = Camera.current.transform.forward*speed;
+        bulletSpawn.AddComponent<Rigidbody>().AddForce(Camera.current.transform.forward*speed, ForceMode.VelocityChange);
         bulletSpawn.GetComponent<Bullet>().FireBullet(damage, range, transform.position);
+        base.Fire();
+    }
+
+    public override void DesactivatePhysic()
+    {
+        MeshCollider[] col = GetComponentsInChildren<MeshCollider>();
+        int l = col.Length;
+        for (int i = 0; i < l; i++)
+            col[i].enabled = false;
+        base.DesactivatePhysic();
+    }
+
+    public override void ActivatePhysic()
+    {
+        MeshCollider[] col = GetComponentsInChildren<MeshCollider>();
+        int l = col.Length;
+        for (int i = 0; i < l; i++)
+            col[i].enabled = true;
+        base.ActivatePhysic();
     }
 }
