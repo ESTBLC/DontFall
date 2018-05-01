@@ -640,6 +640,7 @@ MonoBehaviour:
   mouseYAdjust: 10
   jumpForce: 5
   nbJump: 2
+  camera: {fileID: 0}
 --- !u!114 &114299075071423504
 MonoBehaviour:
   m_ObjectHideFlags: 1

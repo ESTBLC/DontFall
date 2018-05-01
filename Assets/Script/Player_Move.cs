@@ -11,7 +11,7 @@ public class Player_Move : MonoBehaviour
     public int nbJump;              //Number of jump
 
     private Rigidbody rigid;                    //CharacterController component reference
-    private GameObject camera;                  //Child GameObject Camera reference
+    public GameObject camera;                  //Child GameObject Camera reference
     private Player player;
     private float Tx;                           //Actual movement variables
     private float Tz;                           //
@@ -19,6 +19,9 @@ public class Player_Move : MonoBehaviour
     private float CamX;                         //
     private float CamY;                         //
     private int nbJumpLeft;
+    private bool isRunning = false;
+
+    private Animator anim;
 
     void Start()
     {
@@ -26,6 +29,7 @@ public class Player_Move : MonoBehaviour
         player = GetComponent<Player>();                //Setup references
         camera = transform.Find("Camera").gameObject;   //
         nbJumpLeft = nbJump;
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -42,6 +46,11 @@ public class Player_Move : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.W))
+            anim.Play("Running", -1, 0f);
+        if (Input.GetKeyUp(KeyCode.W))
+            anim.Play("Idle", -1, 0f);
         CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
         CamY += Input.GetAxis("Mouse Y") * mouseYAdjust;   //Get actual mouve movement
