@@ -50,6 +50,5 @@ public class AI : MonoBehaviour {
         else
             currentWeapon.Fire();
         rigid.angularVelocity = Vector3.zero;
-
     }
 }
