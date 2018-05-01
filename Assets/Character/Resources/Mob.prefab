@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 136918074037621686}
   - component: {fileID: 54879995112022704}
   - component: {fileID: 114263050390590684}
+  - component: {fileID: 114298739835532382}
   m_Layer: 0
   m_Name: Mob
   m_TagString: Player
@@ -424,11 +425,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7423bc4fa6004284982e05e6478a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 2
+  refPos: {fileID: 0}
   target: {fileID: 0}
   moveSpeed: 3
   stopDistance: 2
+  jumpForce: 5
   inventory: []
+--- !u!114 &114298739835532382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868034723230394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &114805381649862600
 MonoBehaviour:
   m_ObjectHideFlags: 1
