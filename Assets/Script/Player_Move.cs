@@ -126,4 +126,11 @@ public class Player_Move : MonoBehaviour
             /*anim.SetBool("Jump", false);*/
         }
     }
+
+    public void Telep(Vector3 pos)
+    {
+        pos.x += 2;
+        pos.z += 2;
+        transform.position = pos;
+    }
 }
