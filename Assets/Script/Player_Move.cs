@@ -46,11 +46,10 @@ public class Player_Move : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.W))
-            anim.Play("Running", -1, 0f);
+            anim.Play("Running");
         if (Input.GetKeyUp(KeyCode.W))
-            anim.Play("Idle", -1, 0f);
+            anim.Play("Idle");
         CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
         CamY += Input.GetAxis("Mouse Y") * mouseYAdjust;   //Get actual mouve movement
