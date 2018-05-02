@@ -46,10 +46,21 @@ public class Player_Move : MonoBehaviour
 
     void Update()
     {
+        /*float inputH = Input.GetAxis("Horizontal");
+        float inputV = Input.GetAxis("Vertical");
+        anim.SetFloat("inputH", inputH);
+        anim.SetFloat("inputV", inputV);*/
+        
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+            anim.Play("Idle",-1,0f);
         if (Input.GetKeyDown(KeyCode.W))
-            anim.Play("Running");
-        if (Input.GetKeyUp(KeyCode.W))
-            anim.Play("Idle");
+            anim.Play("Run_Forward", -1, 0f);
+        if (Input.GetKeyDown(KeyCode.S))
+            anim.Play("Run_Backward", -1, 0f);
+        /*if (Input.GetKeyDown(KeyCode.Space))
+            anim.SetBool("Jump", true);*/
+        
+
         CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
         CamY += Input.GetAxis("Mouse Y") * mouseYAdjust;   //Get actual mouve movement
@@ -110,6 +121,9 @@ public class Player_Move : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
         if (collision.collider.tag == "Ground")
+        {
             nbJumpLeft = nbJump;
+            /*anim.SetBool("Jump", false);*/
+        }
     }
 }
