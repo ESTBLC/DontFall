@@ -9,7 +9,9 @@ public class Player_Move : MonoBehaviour
     public float mouseYAdjust;      //
     public float jumpForce;         //
     public int nbJump;              //Number of jump
+    public float sprintSpeed;
 
+    private float mult = 1;
     private Rigidbody rigid;                    //CharacterController component reference
     public GameObject camera;                  //Child GameObject Camera reference
     private Player player;
@@ -34,8 +36,8 @@ public class Player_Move : MonoBehaviour
 
     void FixedUpdate()
     {
-        Tx = Input.GetAxis("Horizontal") * leftrightAdjust;    //Get actual movement
-        Tz = Input.GetAxis("Vertical") * forwbacwAdjust;       //
+        Tx = Input.GetAxis("Horizontal") * leftrightAdjust* mult;    //Get actual movement
+        Tz = Input.GetAxis("Vertical") * forwbacwAdjust * mult;       //
         Ty = rigid.velocity.y;
 
         Vector3 moveDirection = new Vector3(Tx, Ty, Tz) + player.impactForce; //Create a new direction vector and apply gravity to it
@@ -59,7 +61,28 @@ public class Player_Move : MonoBehaviour
             anim.Play("Run_Backward", -1, 0f);
         /*if (Input.GetKeyDown(KeyCode.Space))
             anim.SetBool("Jump", true);*/
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            mult = sprintSpeed;
+        }
+        else if (Input.GetKey(KeyCode.O))
+        {
+            mult = 0;
+        }
+        else if (Input.GetKey(KeyCode.C))
+        {
+            mult = 0.5F;
+        }
+        else
+        {
+            mult = 1;
+        }
         
+        
+        
+
+
+
 
         CamX += Input.GetAxis("Mouse X") * mouseXAdjust;   //Get actual mouse movement
         CamX = CamX % 360;  //Modulo 360
