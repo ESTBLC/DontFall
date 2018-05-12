@@ -36,6 +36,7 @@ public class TimeBody : MonoBehaviour {
             pointsInTime = new List<PointInTime>();
             nbframe = 0;
             isRewinding = false;
+            rb.isKinematic = false;
         }
         if (isRewinding)
         {
