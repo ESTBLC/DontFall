@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scene/menu2.unity
-    guid: c3d8e6f8e40dba14f901279184ec1a79
   - enabled: 1
-    path: Assets/Scene/Sandbox.unity
-    guid: 77d95796891dc8f42b924cdd63d0dead
-  - enabled: 0
-    path: Assets/Scene/SandboxTEST.unity
-    guid: c3b597417600af641b246e9e6d2f6e80
+    path: Assets/Scene/Menu.unity
+    guid: e83e0f763efd66a409bb469ec3d2b78b
+  - enabled: 1
+    path: Assets/Scene/CECI EST POUR LA SOUTENANCE.unity
+    guid: 595521a3e30ce144793e52f82c59e74a
+  - enabled: 1
+    path: Assets/Scene/CECI EST POUR LA SOUTENANCE - Solo.unity
+    guid: 7b5342958078e6f41b1367b6a2dda4c2

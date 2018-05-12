@@ -53,7 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugNetwork: {fileID: 0}
   spawnPoints: []
-  index: 0
+  index: 2
   spawnTag: SpawnPoint
-  spawnPlayer: {fileID: 1537266494518742, guid: 6a0a94fec582f244da22dbfa4f103418,
-    type: 2}
+  spawnPlayer: {fileID: 0}
