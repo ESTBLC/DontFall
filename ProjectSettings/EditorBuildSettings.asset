@@ -4,13 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scene/Menu.unity
-    guid: e83e0f763efd66a409bb469ec3d2b78b
-  - enabled: 1
-    path: Assets/Scene/CECI EST POUR LA SOUTENANCE.unity
-    guid: 595521a3e30ce144793e52f82c59e74a
-  - enabled: 1
-    path: Assets/Scene/CECI EST POUR LA SOUTENANCE - Solo.unity
-    guid: 7b5342958078e6f41b1367b6a2dda4c2
+  m_Scenes: []
