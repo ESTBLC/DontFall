@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviour {
 
-    public Text debugNetwork;                           //GUI to debug server state
     [SerializeField] private GameObject[] spawnPoints;  //Array of spawn points
     [SerializeField] private int index = 0;             //Index for find the right spawn point
     [SerializeField] private string spawnTag = "";      //Tag for find every spawn point in the scene
@@ -16,13 +15,12 @@ public class NetworkManager : MonoBehaviour {
         PhotonNetwork.logLevel = PhotonLogLevel.Full;                           //Set debug level of Photon
         PhotonNetwork.ConnectUsingSettings("0.2");                              //Connect to server
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);              //Find spawn points and put them on the array
-        debugNetwork = GameObject.Find("NetworkText").GetComponent<Text>();     //Find the GUI text for debug network
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        debugNetwork.text = PhotonNetwork.connectionStateDetailed.ToString();   //Update GUI network state
+        
 	}
 
     void OnJoinedLobby()

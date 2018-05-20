@@ -44,4 +44,5 @@ MonoBehaviour:
   - DestroyGO
   - PickUPWeaponRPC
   - DropWeapon
+  - ChangeAnimation
   DisableAutoOpenWizard: 1

@@ -29,6 +29,10 @@ ModelImporter:
     4300002: Plateforme
     4300004: Base
     4300006: BaseExt
+    6400000: Base
+    6400002: BaseExt
+    6400004: BaseInt
+    6400006: Plateforme
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -61,7 +65,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
