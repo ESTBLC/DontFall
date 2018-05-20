@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public int life;        //Life var
     public float shield = 1;      //Shield var
     public int dropForce;   //DropForce var
-    public Text lifeText;   //Text to display life
+    //public Text lifeText;   //Text to display life
     public PhotonView photonView;      //Reference to the phontonview component
     public int id;
     public List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float decreaseForce;
     private GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
+    private Animator anim;
     private int indexInventory = 0;
     private bool canShoot = true;
 
@@ -26,7 +27,8 @@ public class Player : MonoBehaviour
         cam = transform.Find("Camera").gameObject;
         photonView = GetComponent<PhotonView>();                        //Setup the reference to the photonview
         id = photonView.viewID;
-        lifeText = GameObject.Find("LifeText").GetComponent<Text>();    //Find the GUI Text to write life to it
+        anim = GetComponent<Animator>();
+        //lifeText = GameObject.Find("LifeText").GetComponent<Text>();    //Find the GUI Text to write life to it
         this.name = "Player " + photonView.viewID;      //Rename the player
         if (!photonView.isMine) //If the player is not the local player launch the desactivation of different component
         {
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour
     {
         if (!photonView.isMine)                  //Update the GUI life is the player is the local player
             return;
-        lifeText.text = life.ToString();    //Write life to it
+        //lifeText.text = life.ToString();    //Write life to it
         impactForce *= decreaseForce;
         if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
             impactForce = Vector3.zero;
@@ -55,6 +57,27 @@ public class Player : MonoBehaviour
     public void Fire()
     {
         currentWeapon.Fire();           //Launch fire of the weapon
+    }
+
+    [PunRPC]
+    public void ChangeAnimation(string name)
+    {
+        switch (name)
+        {
+            case "Forward":
+                anim.SetBool("Forward", true);
+                anim.SetBool("Idle", false);
+                break;
+            case "Backward":
+                anim.SetBool("Backward", true);
+                anim.SetBool("Idle", false);
+                break;
+            case "Idle":
+                anim.SetBool("Idle", true);
+                anim.SetBool("Forward", false);
+                anim.SetBool("Backward", false);
+                break;
+        }
     }
     
     [PunRPC]

@@ -365,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1498955231996344
 GameObject:
   m_ObjectHideFlags: 1
@@ -1825,7 +1825,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964343375058264}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1af7ecb88d5135e45bf1f17ea650d03e, type: 3}
@@ -1954,6 +1954,15 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: Jump
+  - Type: 4
+    SynchronizeType: 0
+    Name: Forward
+  - Type: 4
+    SynchronizeType: 0
+    Name: Backward
+  - Type: 4
+    SynchronizeType: 0
+    Name: Idle
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -2031,9 +2040,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114947873449844928}
-  - {fileID: 114132091443411118}
   - {fileID: 4906285822586920}
-  - {fileID: 4489805558021094}
   - {fileID: 114404594080989950}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
@@ -2054,7 +2061,6 @@ MonoBehaviour:
   life: 100
   shield: 1
   dropForce: 5
-  lifeText: {fileID: 0}
   photonView: {fileID: 0}
   id: 0
   inventory: []
