@@ -23,15 +23,12 @@ public class Player_Move : MonoBehaviour
     private int nbJumpLeft;
     private bool isRunning = false;
 
-    private Animator anim;
-
     void Start()
     {
         rigid = GetComponent<Rigidbody>();   //
         player = GetComponent<Player>();                //Setup references
         camera = transform.Find("Camera").gameObject;   //
         nbJumpLeft = nbJump;
-        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -52,13 +49,19 @@ public class Player_Move : MonoBehaviour
         float inputV = Input.GetAxis("Vertical");
         anim.SetFloat("inputH", inputH);
         anim.SetFloat("inputV", inputV);*/
-        
+
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
-            anim.Play("Idle",-1,0f);
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Idle");
+        }
         if (Input.GetKeyDown(KeyCode.W))
-            anim.Play("Run_Forward", -1, 0f);
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Forward");
+        }
         if (Input.GetKeyDown(KeyCode.S))
-            anim.Play("Run_Backward", -1, 0f);
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Backward");
+        }
         /*if (Input.GetKeyDown(KeyCode.Space))
             anim.SetBool("Jump", true);*/
         if (Input.GetKey(KeyCode.LeftShift))
