@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public float coolDown;
     public float timer;
     public Vector3 origin;
+    public Vector3 rotation;
  
     private Rigidbody rigid;
 
