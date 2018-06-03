@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         weapon.transform.SetParent(cam.transform);                              //Set it as a child of the cam
         weapon.GetComponent<Weapon>().DesactivatePhysic();                      //Desactivate physic effect on it
         weapon.transform.localPosition = weapon.GetComponent<Weapon>().origin;  //Place the weapon on the right localpoint 
-        weapon.transform.localRotation = Quaternion.identity;                   //Reset the rotation
+        weapon.transform.localRotation = Quaternion.Euler(weapon.GetComponent<Weapon>().rotation);  //Set rotation
         inventory.Add(weapon);                                                  //Add the weapon to the inventory
         indexInventory = inventory.Count - 1;                                   //Set the index to the end of the inventory list
         currentWeapon.gameObject.SetActive(false);                              //Desactivate old weapon

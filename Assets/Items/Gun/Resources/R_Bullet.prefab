@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4524278444442674}
   - component: {fileID: 33234003680937172}
   - component: {fileID: 23742020142686226}
-  - component: {fileID: 64686731836909986}
   - component: {fileID: 114927922616095334}
   - component: {fileID: 114370640360331980}
+  - component: {fileID: 136300520127309552}
   m_Layer: 0
   m_Name: R_Bullet
   m_TagString: Weapon
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596148500949878}
-  m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0003264844, y: 0.02235511, z: 0.3411191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,20 +85,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596148500949878}
   m_Mesh: {fileID: 4300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
---- !u!64 &64686731836909986
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596148500949878}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
 --- !u!114 &114370640360331980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,6 +100,7 @@ MonoBehaviour:
   coolDown: 0
   timer: 0
   origin: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!114 &114927922616095334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,3 +127,16 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!136 &136300520127309552
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596148500949878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.012
+  m_Height: 0.06
+  m_Direction: 2
+  m_Center: {x: 0.0000005722977, y: 0.0000000044237822, z: 0.003227353}
