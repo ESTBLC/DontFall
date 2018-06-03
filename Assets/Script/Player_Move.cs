@@ -27,7 +27,7 @@ public class Player_Move : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();   //
         player = GetComponent<Player>();                //Setup references
-        camera = transform.Find("Camera").gameObject;   //
+        camera = player.cam;   //
         nbJumpLeft = nbJump;
     }
 

@@ -9,9 +9,19 @@ public class CubeDeath : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PhotonView phV = other.GetComponent<PhotonView>();
-        if (phV.isMine)
-            PhotonNetwork.Destroy(phV);
+        if (other.tag == "Player")
+        {
+            PhotonView phV = other.GetComponent<PhotonView>();
+            if (phV.isMine)
+                PhotonNetwork.Destroy(phV);
+        }
+        else if(other.tag == "Bullet")
+        {
+            PhotonView phV = other.GetComponent<PhotonView>();
+            if (phV.isMine)
+                PhotonNetwork.Destroy(phV);
+        }
+        
     }
 
 

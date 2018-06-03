@@ -45,4 +45,5 @@ MonoBehaviour:
   - PickUPWeaponRPC
   - DropWeapon
   - ChangeAnimation
+  - HasHit
   DisableAutoOpenWizard: 1
