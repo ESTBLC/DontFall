@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int life;        //Life var
-    public float shield = 1;      //Shield var
+    public float shield = 0;      //Shield var
+
     public int dropForce;   //DropForce var
-    //public Text lifeText;   //Text to display life
+    public Text shieldText;   //Text to display life
     public PhotonView photonView;      //Reference to the phontonview component
     public int id;
     public List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
     public Vector3 impactForce;
 
     [SerializeField] private float decreaseForce;
-    private GameObject cam;
+    private GameObject camFPS;
+    private GameObject camTPS;
+    public GameObject cam;
     private Weapon currentWeapon;       //Reference to the current weapon
     private Animator anim;
     private int indexInventory = 0;
@@ -24,11 +26,13 @@ public class Player : MonoBehaviour
 
     void Start ()
     {
-        cam = transform.Find("Camera").gameObject;
+        camFPS = transform.Find("CameraFPS").gameObject;
+        camTPS = transform.Find("CameraTPS").gameObject;
+        cam = camFPS;
         photonView = GetComponent<PhotonView>();                        //Setup the reference to the photonview
         id = photonView.viewID;
         anim = GetComponent<Animator>();
-        //lifeText = GameObject.Find("LifeText").GetComponent<Text>();    //Find the GUI Text to write life to it
+        shieldText = GameObject.Find("ShieldText").GetComponent<Text>();    //Find the GUI Text to write life to it
         this.name = "Player " + photonView.viewID;      //Rename the player
         if (!photonView.isMine) //If the player is not the local player launch the desactivation of different component
         {
@@ -41,6 +45,8 @@ public class Player : MonoBehaviour
         }
         inventory.Add(GetComponentInChildren<Weapon>().gameObject);
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
+
+        shield = 0;
     }
 	
 	// Update is called once per frame
@@ -48,7 +54,9 @@ public class Player : MonoBehaviour
     {
         if (!photonView.isMine)                  //Update the GUI life is the player is the local player
             return;
-        //lifeText.text = life.ToString();    //Write life to it
+        if (shield < 0)
+            shield = 0;
+        shieldText.text = "Shield: " + shield.ToString() + "%";    //Write life to it
         impactForce *= decreaseForce;
         if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
             impactForce = Vector3.zero;
@@ -57,6 +65,12 @@ public class Player : MonoBehaviour
     public void Fire()
     {
         currentWeapon.Fire();           //Launch fire of the weapon
+    }
+
+    public void SwitchCam()
+    {
+        camFPS.SetActive(false);
+        camTPS.SetActive(true);
     }
 
     [PunRPC]
@@ -95,6 +109,7 @@ public class Player : MonoBehaviour
         GameObject weapon = PhotonView.Find(id).gameObject;                     //Find the weapon to collect
         weapon.transform.SetParent(cam.transform);                              //Set it as a child of the cam
         weapon.GetComponent<Weapon>().DesactivatePhysic();                      //Desactivate physic effect on it
+        weapon.GetComponent<Weapon>().owner = photonView.ownerId;
         weapon.transform.localPosition = weapon.GetComponent<Weapon>().origin;  //Place the weapon on the right localpoint 
         weapon.transform.localRotation = Quaternion.Euler(weapon.GetComponent<Weapon>().rotation);  //Set rotation
         inventory.Add(weapon);                                                  //Add the weapon to the inventory
@@ -123,8 +138,18 @@ public class Player : MonoBehaviour
         Debug.Log(this.gameObject.name + " est touche");
         if (photonView.isMine)
         {
-            impactForce = (transform.position - point)*damage*shield;
+            impactForce = (transform.position - point) * damage;
             impactForce.y = 0;
+        }
+    }
+
+    [PunRPC]
+    public void HasHit(int owner)  //Apply damge to all reference of the player accros the network
+    {
+        Debug.Log("Hit");
+        if (photonView.ownerId == owner)
+        {
+            shield += 5;
         }
     }
 }

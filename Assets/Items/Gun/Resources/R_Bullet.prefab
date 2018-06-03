@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 23742020142686226}
   - component: {fileID: 114927922616095334}
   - component: {fileID: 114370640360331980}
-  - component: {fileID: 136300520127309552}
+  - component: {fileID: 64331149820007080}
   m_Layer: 0
   m_Name: R_Bullet
-  m_TagString: Weapon
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +85,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596148500949878}
   m_Mesh: {fileID: 4300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+--- !u!64 &64331149820007080
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596148500949878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
 --- !u!114 &114370640360331980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,16 +141,3 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!136 &136300520127309552
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596148500949878}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.012
-  m_Height: 0.06
-  m_Direction: 2
-  m_Center: {x: 0.0000005722977, y: 0.0000000044237822, z: 0.003227353}
