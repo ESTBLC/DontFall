@@ -39,11 +39,6 @@ public class Timer : MonoBehaviour
                 Debug.Log("Timer");
             }
         }
-        Debug.Log(scene + "2" + time);
     }
-
-    void TimerExecute()
-    {
-        Debug.Log("Timer");
-    }
+    
 }
