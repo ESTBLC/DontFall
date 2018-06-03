@@ -2146,7 +2146,7 @@ MonoBehaviour:
   - {fileID: 124604520624893900}
   - {fileID: 20160551613114066}
   impactForce: {x: 0, y: 0, z: 0}
-  decreaseForce: 0.6
+  decreaseForce: 0.25
   cam: {fileID: 0}
 --- !u!114 &114888514619055846
 MonoBehaviour:
