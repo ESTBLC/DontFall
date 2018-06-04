@@ -9,29 +9,36 @@ public class Timer : MonoBehaviour
     float time;
     public float TimerInterval = 5f;
     float tick;
+    
 
-    // Use this for initialization
     void Awake()
     {
-        time = (int)Time.time;
-        tick = TimerInterval;
+        string scene;
+        scene = SceneManagerHelper.ActiveSceneName;
+        if (scene != "Menu")
+        {
+            time = (int)Time.time;
+            tick = TimerInterval;
+        }
+        Debug.Log(scene + "1" + time);
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Text>().text = string.Format("{0:0}:{1:00}", Mathf.Floor(time / 60), time % 60);
-        time = (int)Time.time;
-
-        if (time == tick)
+        string scene;
+        scene = SceneManagerHelper.ActiveSceneName;
+        if (scene != "Menu")
         {
-            tick = time + TimerInterval;
-            Debug.Log("Timer");
+            GetComponent<Text>().text = string.Format("{0:0}:{1:00}", Mathf.Floor(time / 60), time % 60);
+            time = (int)Time.time;
+
+            if (time == tick)
+            {
+                tick = time + TimerInterval;
+                Debug.Log("Timer");
+            }
         }
     }
-
-    void TimerExecute()
-    {
-        Debug.Log("Timer");
-    }
+    
 }

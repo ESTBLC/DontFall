@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class Grappin : MonoBehaviour {
+public class Grappin : MonoBehaviour
+{
+
+    private float compteur = 0;
+
+    [SerializeField]
+    public Text text;
+
 
     [SerializeField]
     private KeyCode Key = KeyCode.G;
@@ -31,7 +39,7 @@ public class Grappin : MonoBehaviour {
     private Rigidbody rb;
 
     private Collider collider;
-        
+
     private void Start()
     {
         if (cam == null)
@@ -53,10 +61,26 @@ public class Grappin : MonoBehaviour {
         }
         if (translate)
             Mouvement();
-        if (Input.GetKeyDown(Key))
+
+        Debug.Log(compteur + "A");
+
+        if (Input.GetKeyDown(Key) && compteur <= 0)
         {
             Shoot();
+            //set le timer
+            compteur = 15;
+            Debug.Log(compteur + "B");
+
         }
+        compteur -= Time.deltaTime;
+        if (compteur <= 0)
+        {
+            compteur = 0;
+            Debug.Log(compteur + "C");
+        }
+
+
+
     }
 
     private RaycastHit hit;
@@ -78,7 +102,7 @@ public class Grappin : MonoBehaviour {
     {
         transform.position = Vector3.Lerp(transform.position, loc, speed * Time.deltaTime /*/ Vector3.Distance(transform.position, loc)*/);
         LR.SetPosition(0, hand.position);
-        if(Vector3.Distance(transform.position, loc) < 2.5f)
+        if (Vector3.Distance(transform.position, loc) < 2.5f)
         {
             translate = false;
             LR.enabled = false;

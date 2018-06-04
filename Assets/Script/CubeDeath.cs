@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CubeDeath : MonoBehaviour
 {
+    public GameObject Deathmenu;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +14,11 @@ public class CubeDeath : MonoBehaviour
         {
             PhotonView phV = other.GetComponent<PhotonView>();
             if (phV.isMine)
+            {
                 PhotonNetwork.Destroy(phV);
+                Deathmenu.SetActive(true);
+            }
+
         }
         else if(other.tag == "Bullet")
         {
@@ -21,8 +26,5 @@ public class CubeDeath : MonoBehaviour
             if (phV.isMine)
                 PhotonNetwork.Destroy(phV);
         }
-        
     }
-
-
 }

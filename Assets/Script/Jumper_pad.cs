@@ -22,8 +22,7 @@ public class Jumper_pad : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.contacts[0].thisCollider == colliderPad)
-        {
-            
+        {            
             Object = collision.gameObject;
             rb = Object.GetComponent<Rigidbody>();
             normal = collision.contacts[0].normal;

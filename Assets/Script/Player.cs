@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private GameObject camFPS;
     private GameObject camTPS;
     public GameObject cam;
-    private Weapon currentWeapon;       //Reference to the current weapon
+    public Weapon currentWeapon;       //Reference to the current weapon
     private Animator anim;
     private int indexInventory = 0;
     private bool canShoot = true;
@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
             }
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
-        inventory.Add(GetComponentInChildren<Weapon>().gameObject);
         currentWeapon = inventory[indexInventory].GetComponent<Weapon>();   //Set the weapon to the first one (the bat)
 
         shield = 0;
@@ -58,12 +57,13 @@ public class Player : MonoBehaviour
             shield = 0;
         shieldText.text = "Shield: " + shield.ToString() + "%";    //Write life to it
         impactForce *= decreaseForce;
-        if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
+		if (Mathf.Abs(impactForce.x) + Mathf.Abs(impactForce.y) + Mathf.Abs(impactForce.z) < 1)
             impactForce = Vector3.zero;
 	}
 
     public void Fire()
     {
+		Debug.Log ("Fire");
         currentWeapon.Fire();           //Launch fire of the weapon
     }
 
@@ -73,23 +73,31 @@ public class Player : MonoBehaviour
         camTPS.SetActive(true);
     }
 
-    [PunRPC]
-    public void ChangeAnimation(string name)
+	[PunRPC]
+	public void ChangeAnimation(string name)
     {
         switch (name)
         {
             case "Forward":
                 anim.SetBool("Forward", true);
                 anim.SetBool("Idle", false);
+                anim.SetBool("Backward", false);
                 break;
             case "Backward":
                 anim.SetBool("Backward", true);
                 anim.SetBool("Idle", false);
+                anim.SetBool("Forward", false);
                 break;
             case "Idle":
                 anim.SetBool("Idle", true);
                 anim.SetBool("Forward", false);
                 anim.SetBool("Backward", false);
+                break;
+            case "Jump":
+                anim.Play("Jump");
+                break;
+            case "Hit":
+                anim.Play("Fight");
                 break;
         }
     }
