@@ -21,8 +21,5 @@ public class CubeDeath : MonoBehaviour
             if (phV.isMine)
                 PhotonNetwork.Destroy(phV);
         }
-        
     }
-
-
 }
