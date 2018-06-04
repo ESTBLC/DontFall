@@ -2085,6 +2085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429200d579538ab4489f484190c8eb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
   Key: 103
   cam: {fileID: 20160551613114066}
   mask:

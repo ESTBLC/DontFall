@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimeBody : MonoBehaviour {
 
     private bool isRewinding = false;
-
+    private float compteur = 0;
     [SerializeField]
     private KeyCode Key = KeyCode.T;
 
@@ -47,8 +47,19 @@ public class TimeBody : MonoBehaviour {
     }
     // Update is called once per frame
     void Update()
-    {   if (Input.GetKeyDown(Key))
+    {
+        if (Input.GetKeyDown(Key) && compteur <= 0)
+        {
+            compteur = 40;
             StartRewind();
+        }
+
+
+        compteur -= Time.deltaTime;
+        if (compteur <= 0)
+        {
+            compteur = 0;
+        }
     }
 
 
