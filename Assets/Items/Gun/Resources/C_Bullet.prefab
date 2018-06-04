@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114602611176580890}
   m_Layer: 0
   m_Name: C_Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,3 +156,4 @@ MonoBehaviour:
   coolDown: 0
   timer: 0
   origin: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}

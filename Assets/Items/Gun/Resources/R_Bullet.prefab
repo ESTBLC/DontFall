@@ -21,12 +21,12 @@ GameObject:
   - component: {fileID: 4524278444442674}
   - component: {fileID: 33234003680937172}
   - component: {fileID: 23742020142686226}
-  - component: {fileID: 64686731836909986}
   - component: {fileID: 114927922616095334}
   - component: {fileID: 114370640360331980}
+  - component: {fileID: 64331149820007080}
   m_Layer: 0
   m_Name: R_Bullet
-  m_TagString: Weapon
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596148500949878}
-  m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0003264844, y: 0.02235511, z: 0.3411191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596148500949878}
   m_Mesh: {fileID: 4300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
---- !u!64 &64686731836909986
+--- !u!64 &64331149820007080
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,6 +114,7 @@ MonoBehaviour:
   coolDown: 0
   timer: 0
   origin: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!114 &114927922616095334
 MonoBehaviour:
   m_ObjectHideFlags: 1

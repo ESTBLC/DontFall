@@ -27,7 +27,7 @@ public class Player_Move : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();   //
         player = GetComponent<Player>();                //Setup references
-        camera = transform.Find("Camera").gameObject;   //
+        camera = player.cam;   //
         nbJumpLeft = nbJump;
     }
 
@@ -50,20 +50,30 @@ public class Player_Move : MonoBehaviour
         anim.SetFloat("inputH", inputH);
         anim.SetFloat("inputV", inputV);*/
 
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+		if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Mouse0))
         {
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Idle");
+			//player.ChangeAnimation("Idle");
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Forward");
+			//player.ChangeAnimation("Forward");
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Backward");
+			//player.ChangeAnimation("Backward");
         }
-        /*if (Input.GetKeyDown(KeyCode.Space))
-            anim.SetBool("Jump", true);*/
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Jump");
+            //player.ChangeAnimation ("Jump");
+		}
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Hit");
+        }            
         if (Input.GetKey(KeyCode.LeftShift))
         {
             mult = sprintSpeed;
