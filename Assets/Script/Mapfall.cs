@@ -25,8 +25,7 @@ public class Mapfall : MonoBehaviour {
         }
         if(compteur <= -20)
         {
-            coucou.SetActive(false);
-            coucou.GetComponent<MeshCollider>().isTrigger = true;
+			GameObject.Destroy (coucou);
         }
     }
 
