@@ -16,6 +16,9 @@ public class TimeBody : MonoBehaviour {
     private int SpeedRewind = 2;
     //private int SpeedRewind = 1;
 
+    [SerializeField]
+    private ParticleSystem Particle;
+
     List<PointInTime> pointsInTime;
 
     Rigidbody rb;
@@ -51,6 +54,7 @@ public class TimeBody : MonoBehaviour {
         if (Input.GetKeyDown(Key) && compteur <= 0)
         {
             compteur = 40;
+            Particle.Play();
             StartRewind();
         }
 
