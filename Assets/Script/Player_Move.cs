@@ -70,7 +70,10 @@ public class Player_Move : MonoBehaviour
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Jump");
             //player.ChangeAnimation ("Jump");
 		}
-            
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Hit");
+        }            
         if (Input.GetKey(KeyCode.LeftShift))
         {
             mult = sprintSpeed;

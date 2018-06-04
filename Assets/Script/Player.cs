@@ -96,6 +96,9 @@ public class Player : MonoBehaviour
             case "Jump":
                 anim.Play("Jump");
                 break;
+            case "Hit":
+                anim.Play("Fight");
+                break;
         }
     }
     
