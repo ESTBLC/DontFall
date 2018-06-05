@@ -60,6 +60,14 @@ public class Player_Move : MonoBehaviour
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Forward", isBat);
             //player.ChangeAnimation("Forward");
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Left", isBat);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Right", isBat);
+        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Backward", isBat);

@@ -85,7 +85,8 @@ public class Player : MonoBehaviour
                     anim.SetBool("Idle", false);
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
-                    anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Backward":
                     anim.SetBool("Backward", true);
@@ -93,6 +94,26 @@ public class Player : MonoBehaviour
                     anim.SetBool("Forward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
+                    break;
+                case "Left":
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    anim.SetBool("Left", true);
+                    anim.SetBool("Right", false);
+                    break;
+                case "Right":
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", true);
                     break;
                 case "Idle":
                     anim.SetBool("Idle", true);
@@ -100,6 +121,8 @@ public class Player : MonoBehaviour
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Jump":
                     anim.SetBool("Idle", false);
@@ -107,13 +130,16 @@ public class Player : MonoBehaviour
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", true);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Hit":
                     anim.SetBool("Idle", false);
-                    anim.SetBool("Forward", false);
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", true);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
             }
         }
@@ -127,6 +153,8 @@ public class Player : MonoBehaviour
                     anim.SetBool("Idle", false);
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Backward":
                     anim.SetBool("Backward", true);
@@ -134,6 +162,26 @@ public class Player : MonoBehaviour
                     anim.SetBool("Forward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
+                    break;
+                case "Left":
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    anim.SetBool("Left", true);
+                    anim.SetBool("Right", false);
+                    break;
+                case "Right":
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", true);
                     break;
                 case "Idle":
                     anim.SetBool("Idle", true);
@@ -141,6 +189,8 @@ public class Player : MonoBehaviour
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Jump":
                     anim.SetBool("Idle", false);
@@ -148,12 +198,16 @@ public class Player : MonoBehaviour
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", true);
                     anim.SetBool("Hit", false);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
                 case "Hit":
                     anim.SetBool("Idle", false);
                     anim.SetBool("Backward", false);
                     anim.SetBool("Jump", false);
                     anim.SetBool("Hit", true);
+                    anim.SetBool("Left", false);
+                    anim.SetBool("Right", false);
                     break;
             }
         }
