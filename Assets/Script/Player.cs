@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             shield = 0;
         shieldText.text = "Shield: " + shield.ToString() + "%";    //Write life to it
         impactForce *= decreaseForce;
-		if (Mathf.Abs(impactForce.x) + Mathf.Abs(impactForce.y) + Mathf.Abs(impactForce.z) < 1)
+		if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
             impactForce = Vector3.zero;
 	}
 
