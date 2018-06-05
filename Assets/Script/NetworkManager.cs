@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class NetworkManager : MonoBehaviour {
     [SerializeField] private int index = 0;             //Index for find the right spawn point
     [SerializeField] private string spawnTag = "";      //Tag for find every spawn point in the scene
     [SerializeField] private GameObject spawnPlayer;    //Prefab to spawn
+    public PhotonView photonView;
 
 	// Use this for initialization
 	void Start () {
@@ -23,21 +25,24 @@ public class NetworkManager : MonoBehaviour {
         
 	}
 
-    void OnJoinedLobby()
+   void SpawnPlayer()
     {
-        RoomOptions room = new RoomOptions() { IsVisible = true, MaxPlayers = 10 }; //Create new room if the there is not an open room
-        PhotonNetwork.JoinOrCreateRoom("Dev", room, TypedLobby.Default);            //Connect to the room
-    }
-
-    void OnJoinedRoom()
-    {
-        index = (PhotonNetwork.room.PlayerCount - 1)  % spawnPoints.Length; //Find the right postiton to spawn at
-        SpawnPlayer();                                                      //Call spawning function
-    }
-
-    void SpawnPlayer()
-    {
+        index = Random.Range(0, spawnPoints.Length);
         PhotonNetwork.Instantiate(spawnPlayer.name, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation, 0); //Instanciate the player
         Camera.main.gameObject.SetActive(false);                                                                                      //Desactivate the main camera
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SpawnPlayer();
+        if (PhotonNetwork.isMasterClient)
+            photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
+    }
+
+    [PunRPC]
+    void SetTimer(float timer)
+    {
+        if (!PhotonNetwork.isMasterClient)
+            GetComponent<Timer>().time = timer;
     }
 }
