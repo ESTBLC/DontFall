@@ -14,9 +14,8 @@ public class NetworkManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PhotonNetwork.logLevel = PhotonLogLevel.Full;                           //Set debug level of Photon
-        PhotonNetwork.ConnectUsingSettings("0.2");                              //Connect to server
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);              //Find spawn points and put them on the array
+        SpawnPlayer();
 	}
 	
 	// Update is called once per frame
@@ -34,9 +33,10 @@ public class NetworkManager : MonoBehaviour {
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SpawnPlayer();
-        if (PhotonNetwork.isMasterClient)
-            photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
+        //Debug.Log("Scene");
+        //SpawnPlayer();
+        //if (PhotonNetwork.isMasterClient)
+            //photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
     }
 
     [PunRPC]

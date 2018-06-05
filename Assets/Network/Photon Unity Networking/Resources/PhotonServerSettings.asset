@@ -46,4 +46,5 @@ MonoBehaviour:
   - DropWeapon
   - ChangeAnimation
   - HasHit
+  - SetTimer
   DisableAutoOpenWizard: 1
