@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeBody : MonoBehaviour {
-
+    
     private bool isRewinding = false;
+    public Text text;
     private float compteur = 0;
+
     [SerializeField]
     private KeyCode Key = KeyCode.T;
 
@@ -54,15 +57,17 @@ public class TimeBody : MonoBehaviour {
         if (Input.GetKeyDown(Key) && compteur <= 0)
         {
             compteur = 40;
-            Particle.Play();
             StartRewind();
         }
-
-
         compteur -= Time.deltaTime;
         if (compteur <= 0)
         {
             compteur = 0;
+            text.text = "UP";
+        }
+        else
+        {
+            text.text = (int)compteur + "";
         }
     }
 
