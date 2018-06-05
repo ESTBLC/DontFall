@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 public class Grappin : MonoBehaviour
 {
 
-    private float compteur = 0;
-
+    public float compteur = 0;
+    bool ok;
     [SerializeField]
     public Text text;
 
@@ -67,9 +67,13 @@ public class Grappin : MonoBehaviour
         if (Input.GetKeyDown(Key) && compteur <= 0)
         {
             Shoot();
+            if (ok)
+            {
+                compteur = 15;
+                ok = false;
+            }
             //set le timer
-            compteur = 15;
-            Debug.Log(compteur + "B");
+            
 
         }
         compteur -= Time.deltaTime;
@@ -94,6 +98,7 @@ public class Grappin : MonoBehaviour
             LR.enabled = true;
             LR.SetPosition(1, loc);
             rb.useGravity = false;
+            ok = true;
         }
 
     }

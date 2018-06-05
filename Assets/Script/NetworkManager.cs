@@ -12,18 +12,27 @@ public class NetworkManager : MonoBehaviour {
     [SerializeField] private GameObject spawnPlayer;    //Prefab to spawn
     public PhotonView photonView;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (PhotonNetwork.isMasterClient)
+                GetComponent<Timer>().timer = 0;
+        }
+        
+    }
+
+    void Start () {
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);              //Find spawn points and put them on the array
         SpawnPlayer();
-        if (PhotonNetwork.isMasterClient)
-            GetComponent<Timer>().time = 0;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
+        if(PhotonNetwork.isMasterClient)
+            photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().timer);
     }
 
    void SpawnPlayer()
@@ -35,16 +44,16 @@ public class NetworkManager : MonoBehaviour {
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("Scene");
+        Debug.Log("Scene");
         //SpawnPlayer();
         //if (PhotonNetwork.isMasterClient)
             //photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
     }
 
     [PunRPC]
-    void SetTimer(float timer)
+    void SetTimer(float time)
     {
         if (!PhotonNetwork.isMasterClient)
-            GetComponent<Timer>().time = timer;
+            GetComponent<Timer>().timer = time;
     }
 }
