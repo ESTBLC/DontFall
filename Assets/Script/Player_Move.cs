@@ -38,7 +38,7 @@ public class Player_Move : MonoBehaviour
         Tz = Input.GetAxis("Vertical") * forwbacwAdjust * mult;       //
         Ty = rigid.velocity.y;
 
-        Vector3 moveDirection = new Vector3(Tx, Ty, Tz) + player.impactForce; //Create a new direction vector and apply gravity to it
+        Vector3 moveDirection = new Vector3(Tx, Ty, Tz); //Create a new direction vector and apply gravity to it
 
         moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
         rigid.velocity = moveDirection;
