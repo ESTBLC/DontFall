@@ -16,13 +16,15 @@ public class NetworkManager : MonoBehaviour {
 	void Start () {
         spawnPoints = GameObject.FindGameObjectsWithTag(spawnTag);              //Find spawn points and put them on the array
         SpawnPlayer();
-	}
+        if (PhotonNetwork.isMasterClient)
+            GetComponent<Timer>().time = 0;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        
-	}
+        photonView.RPC("SetTimer", PhotonTargets.All, GetComponent<Timer>().time);
+    }
 
    void SpawnPlayer()
     {

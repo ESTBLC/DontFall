@@ -22,12 +22,13 @@ public class Player_Move : MonoBehaviour
     private float CamY;                         //
     private int nbJumpLeft;
     private bool isRunning = false;
+    private bool isBat = true;
 
     void Start()
     {
         rigid = GetComponent<Rigidbody>();   //
         player = GetComponent<Player>();                //Setup references
-        camera = player.cam;   //
+        //camera = player.cam;   //
         nbJumpLeft = nbJump;
     }
 
@@ -49,7 +50,7 @@ public class Player_Move : MonoBehaviour
         float inputV = Input.GetAxis("Vertical");
         anim.SetFloat("inputH", inputH);
         anim.SetFloat("inputV", inputV);*/
-        bool isBat = player.indexInventory == 0;
+        isBat = player.indexInventory == 0;
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.Space))
         {
             player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Idle", isBat);
