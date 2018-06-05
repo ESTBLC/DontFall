@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeBody : MonoBehaviour {
 
+    public Text text;
     private bool isRewinding = false;
     private float compteur = 0;
     [SerializeField]
@@ -59,6 +61,11 @@ public class TimeBody : MonoBehaviour {
         if (compteur <= 0)
         {
             compteur = 0;
+            text.text = "UP";
+        }
+        else
+        {
+            text.text = (int)compteur + "";
         }
     }
 

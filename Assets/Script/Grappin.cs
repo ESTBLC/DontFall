@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 public class Grappin : MonoBehaviour
 {
 
-    private float compteur = 0;
-
+    public float compteurG = 0;
+    bool ok;
     [SerializeField]
     public Text text;
 
@@ -42,6 +42,8 @@ public class Grappin : MonoBehaviour
 
     private void Start()
     {
+       // compteur = GetComponent<compteurgame>().compteur;
+
         if (cam == null)
         {
             Debug.LogError("Grappin : No camera referenced");
@@ -62,21 +64,25 @@ public class Grappin : MonoBehaviour
         if (translate)
             Mouvement();
 
-        Debug.Log(compteur + "A");
+        Debug.Log(compteurG + "A");
 
-        if (Input.GetKeyDown(Key) && compteur <= 0)
+        if (Input.GetKeyDown(Key) && compteurG <= 0)
         {
             Shoot();
+            if (ok) {
+                compteurG = 15;
+                ok = false;
+            }
             //set le timer
-            compteur = 15;
-            Debug.Log(compteur + "B");
+            
+            
 
         }
-        compteur -= Time.deltaTime;
-        if (compteur <= 0)
+        compteurG -= Time.deltaTime;
+        if (compteurG <= 0)
         {
-            compteur = 0;
-            Debug.Log(compteur + "C");
+            compteurG = 0;
+            Debug.Log(compteurG + "C");
         }
 
 
@@ -94,6 +100,8 @@ public class Grappin : MonoBehaviour
             LR.enabled = true;
             LR.SetPosition(1, loc);
             rb.useGravity = false;
+            ok = true;
+
         }
 
     }

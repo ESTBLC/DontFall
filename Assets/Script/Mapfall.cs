@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mapfall : MonoBehaviour {
-
-    public float compteur;
+    
     public GameObject coucou;
-
+    public int dead;
+    compteurgame compteur;
     void Start()
     {
-       
+        compteur = FindObjectOfType<compteurgame>();
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        compteur -= Time.deltaTime;
-        if (compteur <= 0)
+       
+        Debug.Log(compteur.compteur);
+        if (compteur.compteur >= dead)
         {
             coucou.AddComponent<Rigidbody>();
 
         }
-        if(compteur <= -20)
+        if(compteur.compteur >= dead+20)
         {
 			GameObject.Destroy (coucou);
         }
