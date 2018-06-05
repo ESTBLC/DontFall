@@ -2156,6 +2156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429200d579538ab4489f484190c8eb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  compteur: 0
   text: {fileID: 0}
   Key: 103
   cam: {fileID: 20160551613114066}
@@ -2191,8 +2192,8 @@ MonoBehaviour:
   - {fileID: 114404594080989950}
   - {fileID: 120453903551727394}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 1
+  instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114887855729589116
@@ -2417,7 +2418,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.47
+  m_Radius: 0.8
   m_Height: 2.7
   m_Direction: 1
   m_Center: {x: 0, y: 1.237978, z: 0.062138528}

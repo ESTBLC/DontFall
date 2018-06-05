@@ -258,7 +258,8 @@ public class Player : MonoBehaviour
         if (photonView.isMine)
         {
             Debug.Log("I take damage");
-            impactForce = (transform.position - point) * damage;
+            impactForce = (transform.position - point) * damage * 100;
+            Debug.Log(impactForce);
             if (shield > 0)
             impactForce.y = 0;
         }

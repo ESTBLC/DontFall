@@ -41,7 +41,7 @@ public class Player_Move : MonoBehaviour
         Vector3 moveDirection = new Vector3(Tx, Ty, Tz) + player.impactForce; //Create a new direction vector and apply gravity to it
 
         moveDirection = transform.TransformDirection(moveDirection);    //Make the movement
-        rigid.velocity = moveDirection;                                 //
+        rigid.velocity = moveDirection;
     }
 
     void Update()
