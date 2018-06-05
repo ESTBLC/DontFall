@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public int id;
     public List<GameObject> inventory = new List<GameObject>();   //List of item the player posses
     public List<Object> deactivationList = new List<Object>();    //List of component to desactivate if the player is not the local player
-    public Vector3 impactForce;
+    public ConstantForce cstForce;
 
     [SerializeField] private float decreaseForce;
     private GameObject camFPS;
@@ -56,9 +56,9 @@ public class Player : MonoBehaviour
         if (shield < 0)
             shield = 0;
         shieldText.text = "Shield: " + shield.ToString() + "%";    //Write life to it
-        impactForce *= decreaseForce;
-		if (Mathf.Abs(impactForce.x + impactForce.y + impactForce.z) < 1)
-            impactForce = Vector3.zero;
+        cstForce.relativeForce *= decreaseForce;
+		if (Mathf.Abs(cstForce.relativeForce.x + cstForce.relativeForce.y + cstForce.relativeForce.z) < 1)
+            cstForce.relativeForce = Vector3.zero;
 	}
 
     public void Fire()
@@ -258,10 +258,10 @@ public class Player : MonoBehaviour
         if (photonView.isMine)
         {
             Debug.Log("I take damage");
-            impactForce = (transform.position - point) * damage * 100;
-            Debug.Log(impactForce);
-            if (shield > 0)
-            impactForce.y = 0;
+            Vector3 vect = (transform.position - point) * damage * -1000;
+            Debug.Log(cstForce.relativeForce);
+            vect.y = 0;
+            cstForce.relativeForce = vect;
         }
     }
 
