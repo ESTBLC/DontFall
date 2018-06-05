@@ -2233,7 +2233,7 @@ MonoBehaviour:
   - {fileID: 124604520624893900}
   - {fileID: 20160551613114066}
   cstForce: {fileID: 75837233414514184}
-  decreaseForce: 0.25
+  decreaseForce: 0.8
   cam: {fileID: 0}
   currentWeapon: {fileID: 0}
   indexInventory: 0
