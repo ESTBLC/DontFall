@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonJoinRoom : MonoBehaviour
 {
     public Text RoomName;
-
+    public string TrueRoomName;
     public Menu MenuCanvas;
 
     private void Start()
@@ -16,7 +16,7 @@ public class ButtonJoinRoom : MonoBehaviour
 
     public void JoinRoom()
     {
-        MenuCanvas.JoinRoom(RoomName.text);
+        MenuCanvas.JoinRoom(TrueRoomName);
     }
 
 }

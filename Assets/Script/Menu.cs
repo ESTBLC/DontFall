@@ -46,6 +46,9 @@ public class Menu : Photon.PunBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (!PhotonNetwork.connected)
+            PhotonNetwork.ConnectUsingSettings("1.0");
+        Debug.Log(RoomName.text);
         LobbyRoomName.text = "Room Name: " + PhotonNetwork.room.Name;
         LobbyNbPlayer.text = PhotonNetwork.room.PlayerCount.ToString() + " of " + PhotonNetwork.room.MaxPlayers + " players";
     }
@@ -71,10 +74,8 @@ public class Menu : Photon.PunBehaviour {
         else
             Debug.LogError("Failed to create " + RoomName.text);
 
-        GameObject roomObj = Instantiate(RoomObject);
-        roomObj.transform.SetParent(RoomList.transform, false);
-        ButtonJoinRoom roomScript = roomObj.GetComponent<ButtonJoinRoom>();
-        roomScript.RoomName.text = RoomName.text + "                " + "0" + " / " + MaxPlayers.text;
+        ActivatePannelRoom();
+
     }
 
     public void StartGame(int lvl)
@@ -82,40 +83,57 @@ public class Menu : Photon.PunBehaviour {
         if (PhotonNetwork.isMasterClient)
             PhotonNetwork.LoadLevel(lvl);
     }
-    #endregion
 
-    #region Photon
-    public void LeaveRoom()
+    private void ActivatePannelRoom()
     {
-        PhotonNetwork.LeaveRoom();
-        JoinRoomPannel.SetActive(false);
-        RoomPannel.SetActive(true);
-        SettingsPannel.SetActive(true);
-        SeparationPannel.SetActive(true);
-    }
-
-    public void JoinRoom(string room)
-    {
-        PhotonNetwork.JoinRoom(room);
         JoinRoomPannel.SetActive(true);
         RoomPannel.SetActive(false);
         SettingsPannel.SetActive(false);
         SeparationPannel.SetActive(false);
     }
 
+    private void DesactivatePannelRoom()
+    {
+        JoinRoomPannel.SetActive(false);
+        RoomPannel.SetActive(true);
+        SettingsPannel.SetActive(true);
+        SeparationPannel.SetActive(true);
+    }
+    #endregion
+
+    #region Photon
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        DesactivatePannelRoom();
+    }
+
+    public void JoinRoom(string room)
+    {
+        Debug.Log("Join Room " + room);
+        PhotonNetwork.JoinRoom(room);
+        ActivatePannelRoom();
+    }
+
     public override void OnConnectedToMaster()
     {
-        //PhotonNetwork.JoinLobby();
+        Debug.Log("Connected to master");
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log(PhotonNetwork.GetRoomList().Length);
+        Debug.Log("Join Lobby");
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Join room: " + PhotonNetwork.room.Name);
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Leave room");
     }
 
     public override void OnReceivedRoomListUpdate()
@@ -128,11 +146,12 @@ public class Menu : Photon.PunBehaviour {
             GameObject.Destroy(roomDel.gameObject);
         }
 
-                foreach (RoomInfo roomAd in roomActives)
+        foreach (RoomInfo roomAd in roomActives)
         {
             GameObject room = Instantiate(RoomObject);
             room.transform.SetParent(RoomList.transform, false);
             ButtonJoinRoom roomScript = room.GetComponent<ButtonJoinRoom>();
+            roomScript.TrueRoomName = roomAd.Name;
             roomScript.RoomName.text = roomAd.Name + "          " + roomAd.PlayerCount.ToString() + " / " + roomAd.MaxPlayers.ToString();
         }
     }
