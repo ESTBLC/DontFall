@@ -259,6 +259,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("I take damage");
             impactForce = (transform.position - point) * damage;
+            if (shield > 0)
             impactForce.y = 0;
         }
     }
@@ -267,7 +268,7 @@ public class Player : MonoBehaviour
     public void HasHit(int owner)  //Apply damge to all reference of the player accros the network
     {
         Debug.Log("Hit");
-        if (photonView.ownerId == owner)
+        if (photonView.viewID == owner)
         {
             shield += 5;
         }
