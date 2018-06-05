@@ -941,6 +941,7 @@ GameObject:
   - component: {fileID: 114155143369122774}
   - component: {fileID: 114404594080989950}
   - component: {fileID: 120453903551727394}
+  - component: {fileID: 75837233414514184}
   m_Layer: 0
   m_Name: Perso test
   m_TagString: Player
@@ -1973,6 +1974,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!75 &75837233414514184
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964343375058264}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!81 &81431316510586360
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2220,7 +2232,7 @@ MonoBehaviour:
   - {fileID: 81431316510586360}
   - {fileID: 124604520624893900}
   - {fileID: 20160551613114066}
-  impactForce: {x: 0, y: 0, z: 0}
+  cstForce: {fileID: 0}
   decreaseForce: 0.25
   cam: {fileID: 0}
   currentWeapon: {fileID: 0}
