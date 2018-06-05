@@ -7,7 +7,7 @@ public class Load_Scene : MonoBehaviour {
 
 	public void LoadScene(int lvl)
 	{
-        if(lvl != 0)
+        if(lvl == 2 || lvl == 3)
             Cursor.visible = false;
 
 		SceneManager.LoadScene(lvl);
