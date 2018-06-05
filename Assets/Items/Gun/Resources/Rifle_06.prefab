@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8495b95f590217498a9184e77e8f1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 50
   coolDown: 0.15
   timer: 0
   origin: {x: 0.476, y: -0.205, z: 0.578}
