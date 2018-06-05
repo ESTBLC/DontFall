@@ -258,7 +258,7 @@ public class Player : MonoBehaviour
         if (photonView.isMine)
         {
             Debug.Log("I take damage");
-            Vector3 vect = (transform.position - point) * damage * -100;
+            Vector3 vect = (transform.position - point) * damage * -1000;
             Debug.Log(cstForce.relativeForce);
             vect.y = 0;
             cstForce.relativeForce = vect;
