@@ -1276,7 +1276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964343375058264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0393553, y: -0.0000065565246, z: -25.538357}
+  m_LocalPosition: {x: -4.307013, y: -0.000007759025, z: -30.175064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4952291404973374}
@@ -2223,6 +2223,7 @@ MonoBehaviour:
   decreaseForce: 0.25
   cam: {fileID: 0}
   currentWeapon: {fileID: 0}
+  indexInventory: 0
 --- !u!114 &114888514619055846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2427,7 +2428,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479570809386120}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.035
   m_Height: 0.82
@@ -2586,7 +2587,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1118877742
+  randomSeed: -591159282
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5839,7 +5840,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 835754030
+  randomSeed: 381788119
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9110,7 +9111,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1612776781
+  randomSeed: 101706785
   InitialModule:
     serializedVersion: 3
     enabled: 1
