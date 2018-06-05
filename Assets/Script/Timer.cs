@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-
+    public Text TimerText;
     float time;
     public float TimerInterval = 5f;
     float tick;
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
         scene = SceneManagerHelper.ActiveSceneName;
         if (scene != "Menu")
         {
-            GetComponent<Text>().text = string.Format("{0:0}:{1:00}", Mathf.Floor(time / 60), time % 60);
+            TimerText.text = string.Format("{0:0}:{1:00}", Mathf.Floor(time / 60), time % 60);
             time = (int)Time.time;
 
             if (time == tick)
