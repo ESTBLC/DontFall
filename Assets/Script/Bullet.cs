@@ -23,7 +23,7 @@ public class Bullet : Weapon {
     {
         if (collision.gameObject.tag == "Player")
         {
-            ApplyDamage(collision.gameObject, transform.forward);
+            ApplyDamage(collision.gameObject, collision.contacts[0].point);
             collision.gameObject.GetComponent<PhotonView>().RPC("HasHit", PhotonTargets.All, owner);
         }
     }
