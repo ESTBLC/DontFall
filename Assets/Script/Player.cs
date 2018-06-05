@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public GameObject cam;
     public Weapon currentWeapon;       //Reference to the current weapon
     private Animator anim;
-    private int indexInventory = 0;
+    public int indexInventory = 0;
     private bool canShoot = true;
 
     void Start ()
@@ -74,31 +74,88 @@ public class Player : MonoBehaviour
     }
 
 	[PunRPC]
-	public void ChangeAnimation(string name)
+	public void ChangeAnimation(string name, bool isBat)
     {
-        switch (name)
+        if (isBat) { // Bat
+            anim.SetBool("isBat", true);
+            switch (name)
+            {
+                case "Forward":
+                    anim.SetBool("Forward", true);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Backward":
+                    anim.SetBool("Backward", true);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Idle":
+                    anim.SetBool("Idle", true);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Jump":
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", true);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Hit":
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", true);
+                    break;
+            }
+        }
+        else // Rifle
         {
-            case "Forward":
-                anim.SetBool("Forward", true);
-                anim.SetBool("Idle", false);
-                anim.SetBool("Backward", false);
-                break;
-            case "Backward":
-                anim.SetBool("Backward", true);
-                anim.SetBool("Idle", false);
-                anim.SetBool("Forward", false);
-                break;
-            case "Idle":
-                anim.SetBool("Idle", true);
-                anim.SetBool("Forward", false);
-                anim.SetBool("Backward", false);
-                break;
-            case "Jump":
-                anim.Play("Jump");
-                break;
-            case "Hit":
-                anim.Play("Fight");
-                break;
+            anim.SetBool("isBat", false);
+            switch (name)
+            {
+                case "Forward":
+                    anim.SetBool("Forward", true);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    break;
+                case "Backward":
+                    anim.SetBool("Backward", true);
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Idle":
+                    anim.SetBool("Idle", true);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Jump":
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Forward", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", true);
+                    anim.SetBool("Hit", false);
+                    break;
+                case "Hit":
+                    anim.SetBool("Idle", false);
+                    anim.SetBool("Backward", false);
+                    anim.SetBool("Jump", false);
+                    anim.SetBool("Hit", true);
+                    break;
+            }
         }
     }
     

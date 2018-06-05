@@ -49,31 +49,31 @@ public class Player_Move : MonoBehaviour
         float inputV = Input.GetAxis("Vertical");
         anim.SetFloat("inputH", inputH);
         anim.SetFloat("inputV", inputV);*/
-
-		if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Mouse0))
+        bool isBat = player.indexInventory == 0;
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.Space))
         {
-            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Idle");
-			//player.ChangeAnimation("Idle");
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Idle", isBat);
+            //player.ChangeAnimation("Idle");
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Forward");
-			//player.ChangeAnimation("Forward");
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Forward", isBat);
+            //player.ChangeAnimation("Forward");
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Backward");
-			//player.ChangeAnimation("Backward");
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Backward", isBat);
+            //player.ChangeAnimation("Backward");
         }
-		if (Input.GetKeyDown (KeyCode.Space))
-		{
-            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Jump");
-            //player.ChangeAnimation ("Jump");
-		}
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Hit");
-        }            
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Jump", isBat);
+            //player.ChangeAnimation ("Jump");
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            player.photonView.RPC("ChangeAnimation", PhotonTargets.All, "Hit", isBat);
+        }           
         if (Input.GetKey(KeyCode.LeftShift))
         {
             mult = sprintSpeed;
