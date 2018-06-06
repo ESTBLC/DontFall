@@ -19,6 +19,7 @@ public class YouWin : MonoBehaviour {
     {
 		if (PhotonNetwork.room.PlayerCount == 1)
         {
+            PhotonNetwork.Disconnect();
             pause.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

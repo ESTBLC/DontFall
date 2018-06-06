@@ -16,6 +16,7 @@ public class CubeDeath : MonoBehaviour
             PhotonView phV = other.GetComponent<PhotonView>();
             if (phV.isMine)
             {
+                PhotonNetwork.Disconnect();
                 pause.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
