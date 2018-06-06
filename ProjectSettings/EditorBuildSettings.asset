@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/U are not ready.unity
     guid: ce60a10d7e7551642b9431be49745041
+  - enabled: 1
+    path: Assets/Scene/U are not ready - Solo.unity
+    guid: 7b7cb50b95aa9804d91969ba5c03ff26
