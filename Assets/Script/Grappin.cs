@@ -77,6 +77,7 @@ public class Grappin : MonoBehaviour
 
         }
         compteur -= Time.deltaTime;
+
         if (compteur <= 0)
         {
             compteur = 0;

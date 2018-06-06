@@ -17,6 +17,7 @@ public class cdgrapinafichage : MonoBehaviour {
         compteur = FindObjectOfType<Grappin>();
         if(compteur.compteur != 0)
         {
+            Debug.Log(compteur.compteur);
             text.text = (int)compteur.compteur + "";
         }
         else
