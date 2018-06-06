@@ -6,14 +6,9 @@ using UnityEngine.SceneManagement;
 public class YouWin : MonoBehaviour {
 
     public GameObject win;
+    public Pausemenu pause;
     private bool ok = false;
     // Use this for initialization
-
-    private void Awake()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-    }
 
     void Start () {
 		
@@ -22,16 +17,18 @@ public class YouWin : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		if (PhotonNetwork.room.PlayerCount == 1 && !ok)
+		if (PhotonNetwork.room.PlayerCount == 1)
         {
+            pause.enabled = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             ok = true;
-            NeedToDisplay();
+            win.SetActive(true);
         }
 	}
 
     void NeedToDisplay()
     {
-        //Cursor.visible = true;
-        win.SetActive(true);
+        
     }
 }
